@@ -24,6 +24,8 @@
     "comma-dangle": 0,
     "react/jsx-filename-extension": 0,
     "react/jsx-sort-props": 1,
+    "react/jsx-props-no-spreading": 0,
+    "react/no-unescaped-entities": 0,
     // "react/prefer-stateless-function": false,
     "no-unused-expressions": ["error", {
       "allowShortCircuit": true,
