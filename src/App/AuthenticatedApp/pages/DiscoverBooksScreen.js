@@ -5,10 +5,10 @@ import React, { useState } from "react";
 import Tooltip from "@reach/tooltip";
 import { FaSearch, FaTimes } from "react-icons/fa";
 import { useAsync } from "react-async";
-import * as booksClient from "../utils/books-client";
-import BookRow from "../components/BookRow";
-import BookListUL from "../styles/BookListUL";
-import Spinner from "../components/Spinner";
+import * as booksClient from "../../../utils/books-client";
+import BookRow from "../../../components/BookRow";
+import BookListUL from "../../../styles/BookListUL";
+import Spinner from "../../../components/Spinner";
 
 const initialSearch = () => {
   return booksClient.search("");

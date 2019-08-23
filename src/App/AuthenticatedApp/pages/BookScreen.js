@@ -6,17 +6,17 @@ import { useAsync } from "react-async";
 import debounceFn from "debounce-fn";
 import { FaRegCalendarAlt } from "react-icons/fa";
 import Tooltip from "@reach/tooltip";
-import * as mq from "../styles/media-queries";
-import * as colors from "../styles/colors";
-import Spinner from "../components/Spinner";
+import * as mq from "../../../styles/media-queries";
+import * as colors from "../../../styles/colors";
+import Spinner from "../../../components/Spinner";
 import {
   useListItemDispatch,
   useSingleListItemState,
   updateListItem,
-} from "../context/list-item-context";
-import Rating from "../components/Rating";
-import * as bookClient from "../utils/books-client";
-import StatusButtons from "../components/StatusButtons";
+} from "../../../context/list-item-context";
+import Rating from "../../../components/Rating";
+import * as bookClient from "../../../utils/books-client";
+import StatusButtons from "../../../components/StatusButtons";
 
 const getBook = ({ bookId }) => {
   return bookClient.read(bookId).then(data => data.book);

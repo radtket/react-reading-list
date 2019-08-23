@@ -1,15 +1,15 @@
 import React from "react";
-
-/** @jsx jsx */
-import { jsx } from "@emotion/core";
-
 import { Router, Redirect } from "@reach/router";
+
+// Context
 import { ListItemProvider } from "../../context/list-item-context";
-import ReadingListScreen from "../../screens/ReadingListScreen";
-import FinishedBooksScreen from "../../screens/FinishedScreen";
-import DiscoverBooksScreen from "../../screens/DiscoverBooksScreen";
-import BookScreen from "../../screens/BookScreen";
-import NotFound from "../../screens/NotFound";
+
+// Pages
+import BookScreen from "./pages/BookScreen";
+import DiscoverBooksScreen from "./pages/DiscoverBooksScreen";
+import FinishedBooksScreen from "./pages/FinishedScreen";
+import NotFound from "./pages/NotFound";
+import ReadingListScreen from "./pages/ReadingListScreen";
 
 const RedirectHome = () => {
   return <Redirect to="/list" />;
@@ -20,10 +20,10 @@ const Routes = () => {
     <ListItemProvider>
       <Router>
         <RedirectHome path="/" />
-        <ReadingListScreen path="/list" />
-        <FinishedBooksScreen path="/finished" />
-        <DiscoverBooksScreen path="/discover" />
         <BookScreen path="/book/:bookId" />
+        <DiscoverBooksScreen path="/discover" />
+        <FinishedBooksScreen path="/finished" />
+        <ReadingListScreen path="/list" />
         <NotFound default />
       </Router>
     </ListItemProvider>

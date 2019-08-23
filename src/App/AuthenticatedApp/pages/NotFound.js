@@ -1,6 +1,5 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
-
 import { Link } from "@reach/router";
 
 const NotFound = () => {
