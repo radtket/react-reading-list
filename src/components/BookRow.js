@@ -67,7 +67,7 @@ const BookRow = ({ book }) => {
               >
                 {title}
               </h2>
-              {listItem ? <Rating listItem={listItem} /> : null}
+              {listItem && <Rating listItem={listItem} />}
             </div>
             <div css={{ marginLeft: 10 }}>
               <div

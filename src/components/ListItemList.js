@@ -6,7 +6,11 @@ import { useListItemState } from "../context/list-item-context";
 import BookListUL from "../styles/BookListUL";
 import BookRow from "./BookRow";
 
-function ListItemList({ filterListItems, noListItems, noFilteredListItems }) {
+const ListItemList = ({
+  filterListItems,
+  noListItems,
+  noFilteredListItems,
+}) => {
   const listItems = useListItemState();
   const filteredListItems = listItems.filter(filterListItems);
 
@@ -34,6 +38,6 @@ function ListItemList({ filterListItems, noListItems, noFilteredListItems }) {
       </BookListUL>
     </div>
   );
-}
+};
 
 export default ListItemList;

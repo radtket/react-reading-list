@@ -18,16 +18,16 @@ import Rating from "../components/Rating";
 import * as bookClient from "../utils/books-client";
 import StatusButtons from "../components/StatusButtons";
 
-function getBook({ bookId }) {
+const getBook = ({ bookId }) => {
   return bookClient.read(bookId).then(data => data.book);
-}
+};
 
 const formatDate = date =>
   new Intl.DateTimeFormat("en-US", { month: "short", year: "2-digit" }).format(
     date
   );
 
-function BookScreen({ bookId }) {
+const BookScreen = ({ bookId }) => {
   const { data: book, isPending, isRejected, isResolved, error } = useAsync({
     promiseFn: getBook,
     bookId,
@@ -106,7 +106,7 @@ function BookScreen({ bookId }) {
             </div>
           </div>
           <div css={{ marginTop: 10, height: 46 }}>
-            {listItem ? (
+            {listItem && (
               <>
                 <Rating listItem={listItem} />
                 <Tooltip
@@ -118,29 +118,28 @@ function BookScreen({ bookId }) {
                     <FaRegCalendarAlt css={{ marginTop: -2, marginRight: 5 }} />
                     <span>
                       {formatDate(listItem.startDate)}{" "}
-                      {listItem.finishDate
-                        ? `— ${formatDate(listItem.finishDate)}`
-                        : null}
+                      {listItem.finishDate &&
+                        `— ${formatDate(listItem.finishDate)}`}
                     </span>
                   </div>
                 </Tooltip>
               </>
-            ) : null}
+            )}
           </div>
           <br />
           <p>{synopsis}</p>
         </div>
       </div>
-      {listItem ? <NotesTextarea listItem={listItem} /> : null}
+      {listItem && <NotesTextarea listItem={listItem} />}
     </div>
   );
-}
+};
 
-function updateNotes([notes], { dispatch, listItem }) {
+const updateNotes = ([notes], { dispatch, listItem }) => {
   return updateListItem(dispatch, listItem.id, { notes });
-}
+};
 
-function NotesTextarea({ listItem }) {
+const NotesTextarea = ({ listItem }) => {
   const dispatch = useListItemDispatch();
   const { isPending, isRejected, error, run } = useAsync({
     deferFn: updateNotes,
@@ -148,9 +147,9 @@ function NotesTextarea({ listItem }) {
     listItem,
   });
   const debouncedRun = useCallback(debounceFn(run, { wait: 300 }), []);
-  function handleNotesChange(e) {
+  const handleNotesChange = e => {
     debouncedRun(e.target.value);
-  }
+  };
 
   return (
     <>
@@ -167,7 +166,7 @@ function NotesTextarea({ listItem }) {
         >
           Notes
         </label>
-        {isRejected ? (
+        {isRejected && (
           <span css={{ color: "red", fontSize: "0.7em" }}>
             <span>There was an error:</span>{" "}
             <pre
@@ -181,8 +180,8 @@ function NotesTextarea({ listItem }) {
               {error.message}
             </pre>
           </span>
-        ) : null}
-        {isPending ? <Spinner /> : null}
+        )}
+        {isPending && <Spinner />}
       </div>
       <textarea
         css={{ width: "100%", minHeight: 300 }}
@@ -192,6 +191,6 @@ function NotesTextarea({ listItem }) {
       />
     </>
   );
-}
+};
 
 export default BookScreen;

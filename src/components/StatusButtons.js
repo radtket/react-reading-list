@@ -23,12 +23,12 @@ import {
 import useCallbackStatus from "../utils/use-callback-status";
 import CircleButton from "../styles/CircleButton";
 
-function TooltipButton({ label, highlight, onClick, icon, ...rest }) {
+const TooltipButton = ({ label, highlight, onClick, icon, ...rest }) => {
   const { isPending, isRejected, error, run } = useCallbackStatus();
 
-  function handleClick() {
+  const handleClick = () => {
     run(onClick());
-  }
+  };
 
   return (
     <Tooltip label={isRejected ? error.message : label}>
@@ -44,35 +44,35 @@ function TooltipButton({ label, highlight, onClick, icon, ...rest }) {
       </CircleButton>
     </Tooltip>
   );
-}
+};
 
-function StatusButtons({ book }) {
+const StatusButtons = ({ book }) => {
   const user = useUser();
   const dispatch = useListItemDispatch();
   const listItem = useSingleListItemState({
     bookId: book.id,
   });
 
-  function handleRemoveClick() {
+  const handleRemoveClick = () => {
     return removeListItem(dispatch, listItem.id);
-  }
+  };
 
-  function handleMarkAsReadClick() {
+  const handleMarkAsReadClick = () => {
     return updateListItem(dispatch, listItem.id, { finishDate: Date.now() });
-  }
+  };
 
-  function handleAddClick() {
+  const handleAddClick = () => {
     return addListItem(dispatch, { ownerId: user.id, bookId: book.id });
-  }
+  };
 
-  function handleMarkAsUnreadClick() {
+  const handleMarkAsUnreadClick = () => {
     return updateListItem(dispatch, listItem.id, { finishDate: null });
-  }
+  };
 
   return (
     <>
-      {listItem ? (
-        listItem.finishDate ? (
+      {listItem &&
+        (listItem.finishDate ? (
           <TooltipButton
             highlight={colors.yellow}
             icon={<FaBook />}
@@ -86,8 +86,7 @@ function StatusButtons({ book }) {
             label="Mark as read"
             onClick={handleMarkAsReadClick}
           />
-        )
-      ) : null}
+        ))}
       {listItem ? (
         <TooltipButton
           highlight={colors.danger}
@@ -105,6 +104,6 @@ function StatusButtons({ book }) {
       )}
     </>
   );
-}
+};
 
 export default StatusButtons;

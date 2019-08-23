@@ -57,13 +57,12 @@ const LoginForm = ({ onSubmit, buttonText }) => {
         />
         <div>
           <Button color="primary" type="submit" variant="contained">
-            {buttonText}{" "}
-            {isPending ? <Spinner css={{ marginLeft: 5 }} /> : null}
+            {buttonText} {isPending && <Spinner css={{ marginLeft: 5 }} />}
           </Button>
         </div>
-        {isRejected ? (
-          <div css={{ color: "red" }}>{error ? error.message : null}</div>
-        ) : null}
+        {isRejected && (
+          <div css={{ color: "red" }}>{error && error.message}</div>
+        )}
       </form>
     </>
   );

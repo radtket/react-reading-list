@@ -6,7 +6,7 @@ import * as listItemClient from "../utils/list-items-client";
 const ListItemStateContext = createContext();
 const ListItemDispatchContext = createContext();
 
-function listReducer(listItems, action) {
+const listReducer = (listItems, action) => {
   switch (action.type) {
     case "add": {
       return [...listItems, action.listItem];
@@ -29,9 +29,9 @@ function listReducer(listItems, action) {
       throw new Error(`Unhandled action type: ${action.type}`);
     }
   }
-}
+};
 
-function ListItemProvider({ children }) {
+const ListItemProvider = ({ children }) => {
   const { data } = useAuth();
   const [state, dispatch] = useReducer(listReducer, data.listItems);
   return (
@@ -41,30 +41,30 @@ function ListItemProvider({ children }) {
       </ListItemDispatchContext.Provider>
     </ListItemStateContext.Provider>
   );
-}
+};
 
-function removeListItem(dispatch, id) {
+const removeListItem = (dispatch, id) => {
   return listItemClient.remove(id).then(data => {
     dispatch({ type: "remove", id });
     return data;
   });
-}
+};
 
-function addListItem(dispatch, listItemData) {
+const addListItem = (dispatch, listItemData) => {
   return listItemClient.create(listItemData).then(data => {
     dispatch({ type: "add", listItem: data.listItem });
     return data;
   });
-}
+};
 
-function updateListItem(dispatch, listItemId, updates) {
+const updateListItem = (dispatch, listItemId, updates) => {
   return listItemClient.update(listItemId, updates).then(data => {
     dispatch({ type: "update", listItem: data.listItem });
     return data;
   });
-}
+};
 
-function useListItemDispatch() {
+const useListItemDispatch = () => {
   const context = useContext(ListItemDispatchContext);
   if (context === undefined) {
     throw new Error(
@@ -72,17 +72,17 @@ function useListItemDispatch() {
     );
   }
   return context;
-}
+};
 
-function useListItemState() {
+const useListItemState = () => {
   const context = useContext(ListItemStateContext);
   if (context === undefined) {
     throw new Error(`useListItemState must be used within a ListItemProvider`);
   }
   return context;
-}
+};
 
-function useSingleListItemState({ bookId }) {
+const useSingleListItemState = ({ bookId }) => {
   const listItems = useListItemState();
   if (!listItems) {
     throw new Error(`useListItemState must be used within a ListItemProvider`);
@@ -92,7 +92,7 @@ function useSingleListItemState({ bookId }) {
     li => li.ownerId === user.id && li.bookId === bookId
   );
   return listItem;
-}
+};
 
 export {
   ListItemProvider,

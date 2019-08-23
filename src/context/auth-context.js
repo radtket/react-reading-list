@@ -9,7 +9,7 @@ import React, {
   useLayoutEffect,
 } from "react";
 import { useAsync } from "react-async";
-import { bootstrapAppData } from "../utils/bootstrap";
+import bootstrapAppData from "../utils/bootstrapAppData";
 import * as authClient from "../utils/auth-client";
 import FullPageSpinner from "../components/FullPageSpinner";
 
@@ -60,12 +60,12 @@ const AuthProvider = props => {
   );
 };
 
-function useAuth() {
+const useAuth = () => {
   const context = useContext(AuthContext);
   if (context === undefined) {
     throw new Error(`useAuth must be used within a AuthProvider`);
   }
   return context;
-}
+};
 
 export { AuthProvider, useAuth };

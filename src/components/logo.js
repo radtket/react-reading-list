@@ -6,7 +6,8 @@ const Logo = ({ width = "48", height = "48" }) => {
       height={`${height}px`}
       viewBox="0 0 48 48"
       width={`${width}px`}
-      xmlns="http://www.w3.org/2000/svg">
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <title>Bookshelf</title>
       <g>
         <path

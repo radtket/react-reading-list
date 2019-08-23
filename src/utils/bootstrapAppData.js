@@ -1,7 +1,7 @@
 import { getUser } from "./auth-client";
 import { readForUser } from "./list-items-client";
 
-async function bootstrapAppData() {
+const bootstrapAppData = async () => {
   const data = await getUser();
   if (!data) {
     return { user: null, listItems: [] };
@@ -12,6 +12,6 @@ async function bootstrapAppData() {
     user,
     listItems,
   };
-}
+};
 
-export { bootstrapAppData };
+export default bootstrapAppData;

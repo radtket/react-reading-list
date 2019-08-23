@@ -10,11 +10,11 @@ import BookRow from "../components/BookRow";
 import BookListUL from "../styles/BookListUL";
 import Spinner from "../components/Spinner";
 
-function initialSearch() {
+const initialSearch = () => {
   return booksClient.search("");
-}
+};
 
-function DiscoverBooksScreen() {
+const DiscoverBooksScreen = () => {
   const [query, setQuery] = useState("");
   const [hasSearched, setHasSearched] = useState();
   const { data, isPending, isRejected, isResolved, error, run } = useAsync({
@@ -23,15 +23,15 @@ function DiscoverBooksScreen() {
   });
   const { books } = data || { books: [] };
 
-  function handleInputChange(e) {
+  const handleInputChange = e => {
     setQuery(e.target.value);
-  }
+  };
 
-  function handleSearchClick(e) {
+  const handleSearchClick = e => {
     e.preventDefault();
     setHasSearched(true);
     run(query);
-  }
+  };
 
   return (
     <div>
@@ -66,12 +66,12 @@ function DiscoverBooksScreen() {
           </Tooltip>
         </form>
 
-        {isRejected ? (
+        {isRejected && (
           <div css={{ color: "red" }}>
             <p>There was an error:</p>
             <pre>{error.message}</pre>
           </div>
-        ) : null}
+        )}
       </div>
       <div>
         {hasSearched ? null : (
@@ -91,8 +91,8 @@ function DiscoverBooksScreen() {
             ) : null}
           </div>
         )}
-        {isResolved ? (
-          books.length ? (
+        {isResolved &&
+          (books.length ? (
             <BookListUL css={{ marginTop: 20 }}>
               {books.map(book => (
                 <li key={book.id}>
@@ -117,11 +117,10 @@ function DiscoverBooksScreen() {
                 </p>
               )}
             </div>
-          ) : null
-        ) : null}
+          ) : null)}
       </div>
     </div>
   );
-}
+};
 
 export default DiscoverBooksScreen;

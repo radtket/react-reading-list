@@ -11,11 +11,11 @@ import {
 } from "../context/list-item-context";
 import * as colors from "../styles/colors";
 
-function updateRating([rating], { dispatch, listItem }) {
+const updateRating = ([rating], { dispatch, listItem }) => {
   return updateListItem(dispatch, listItem.id, { rating });
-}
+};
 
-function Rating({ listItem }) {
+const Rating = ({ listItem }) => {
   const [isTabbing, setIsTabbing] = useState(false);
 
   const dispatch = useListItemDispatch();
@@ -28,11 +28,11 @@ function Rating({ listItem }) {
   const debouncedRun = useCallback(debounceFn(run, { wait: 300 }), []);
 
   useEffect(() => {
-    function handleKeyDown(event) {
+    const handleKeyDown = event => {
       if (event.key === "Tab") {
         setIsTabbing(true);
       }
-    }
+    };
     document.addEventListener("keydown", handleKeyDown, { once: true });
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, []);
@@ -114,7 +114,7 @@ function Rating({ listItem }) {
         >
           {stars}
         </span>
-        {isRejected ? (
+        {isRejected && (
           <span css={{ color: "red", fontSize: "0.7em" }}>
             <span>There was an error:</span>{" "}
             <pre
@@ -128,10 +128,10 @@ function Rating({ listItem }) {
               {error.message}
             </pre>
           </span>
-        ) : null}
+        )}
       </div>
     </div>
   );
-}
+};
 
 export default Rating;
