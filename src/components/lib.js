@@ -1,7 +1,5 @@
 /** @jsx jsx */
-import { jsx } from "@emotion/core";
-
-import { keyframes } from "@emotion/core";
+import { keyframes, jsx } from "@emotion/core";
 import styled from "@emotion/styled";
 import { FaSpinner } from "react-icons/fa";
 import * as colors from "../styles/colors";
