@@ -2,16 +2,21 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 
-import React from "react";
+import React, {
+  useState,
+  useContext,
+  createContext,
+  useLayoutEffect,
+} from "react";
 import { useAsync } from "react-async";
 import { bootstrapAppData } from "../utils/bootstrap";
 import * as authClient from "../utils/auth-client";
 import FullPageSpinner from "../components/FullPageSpinner";
 
-const AuthContext = React.createContext();
+const AuthContext = createContext();
 
 const AuthProvider = props => {
-  const [firstAttemptFinished, setFirstAttemptFinished] = React.useState(false);
+  const [firstAttemptFinished, setFirstAttemptFinished] = useState(false);
   const {
     data = { user: null, listItems: [] },
     error,
@@ -23,7 +28,7 @@ const AuthProvider = props => {
     promiseFn: bootstrapAppData,
   });
 
-  React.useLayoutEffect(() => {
+  useLayoutEffect(() => {
     if (isSettled) {
       setFirstAttemptFinished(true);
     }
@@ -56,7 +61,7 @@ const AuthProvider = props => {
 };
 
 function useAuth() {
-  const context = React.useContext(AuthContext);
+  const context = useContext(AuthContext);
   if (context === undefined) {
     throw new Error(`useAuth must be used within a AuthProvider`);
   }

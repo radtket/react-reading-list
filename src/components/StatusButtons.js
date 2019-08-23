@@ -70,7 +70,7 @@ function StatusButtons({ book }) {
   }
 
   return (
-    <React.Fragment>
+    <>
       {listItem ? (
         listItem.finishDate ? (
           <TooltipButton
@@ -103,7 +103,7 @@ function StatusButtons({ book }) {
           onClick={handleAddClick}
         />
       )}
-    </React.Fragment>
+    </>
   );
 }
 

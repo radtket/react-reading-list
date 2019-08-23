@@ -4,7 +4,7 @@ import { jsx } from "@emotion/core";
 import { Link } from "@reach/router";
 import ListItemList from "../components/ListItemList";
 
-function ReadingListScreen() {
+const ReadingListScreen = () => {
   return (
     <ListItemList
       filterListItems={li => !li.finishDate}
@@ -24,6 +24,6 @@ function ReadingListScreen() {
       }
     />
   );
-}
+};
 
 export default ReadingListScreen;

@@ -1,7 +1,7 @@
-import React from "react";
+import React, { createContext, useContext } from "react";
 import { useAuth } from "./auth-context";
 
-const UserContext = React.createContext();
+const UserContext = createContext();
 
 function UserProvider(props) {
   const {
@@ -11,7 +11,7 @@ function UserProvider(props) {
 }
 
 function useUser() {
-  const context = React.useContext(UserContext);
+  const context = useContext(UserContext);
   if (context === undefined) {
     throw new Error(`useUser must be used within a UserProvider`);
   }

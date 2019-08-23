@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 
-import React from "react";
+import React, { useState } from "react";
 import Tooltip from "@reach/tooltip";
 import { FaSearch, FaTimes } from "react-icons/fa";
 import { useAsync } from "react-async";
@@ -15,8 +15,8 @@ function initialSearch() {
 }
 
 function DiscoverBooksScreen() {
-  const [query, setQuery] = React.useState("");
-  const [hasSearched, setHasSearched] = React.useState();
+  const [query, setQuery] = useState("");
+  const [hasSearched, setHasSearched] = useState();
   const { data, isPending, isRejected, isResolved, error, run } = useAsync({
     promiseFn: initialSearch,
     deferFn: booksClient.search,

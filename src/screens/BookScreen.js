@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 
-import React from "react";
+import React, { useCallback } from "react";
 import { useAsync } from "react-async";
 import debounceFn from "debounce-fn";
 import { FaRegCalendarAlt } from "react-icons/fa";
@@ -107,7 +107,7 @@ function BookScreen({ bookId }) {
           </div>
           <div css={{ marginTop: 10, height: 46 }}>
             {listItem ? (
-              <React.Fragment>
+              <>
                 <Rating listItem={listItem} />
                 <Tooltip
                   label={
@@ -124,7 +124,7 @@ function BookScreen({ bookId }) {
                     </span>
                   </div>
                 </Tooltip>
-              </React.Fragment>
+              </>
             ) : null}
           </div>
           <br />
@@ -147,13 +147,13 @@ function NotesTextarea({ listItem }) {
     dispatch,
     listItem,
   });
-  const debouncedRun = React.useCallback(debounceFn(run, { wait: 300 }), []);
+  const debouncedRun = useCallback(debounceFn(run, { wait: 300 }), []);
   function handleNotesChange(e) {
     debouncedRun(e.target.value);
   }
 
   return (
-    <React.Fragment>
+    <>
       <div>
         <label
           css={{
@@ -190,7 +190,7 @@ function NotesTextarea({ listItem }) {
         id="notes"
         onChange={handleNotesChange}
       />
-    </React.Fragment>
+    </>
   );
 }
 

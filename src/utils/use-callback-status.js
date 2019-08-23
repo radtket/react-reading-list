@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useRef, useLayoutEffect, useReducer } from "react";
 
 function useIsMounted() {
-  const mounted = React.useRef(false);
-  React.useLayoutEffect(() => {
+  const mounted = useRef(false);
+  useLayoutEffect(() => {
     mounted.current = true;
     return () => (mounted.current = false);
   }, []);
@@ -11,10 +11,10 @@ function useIsMounted() {
 
 function useCallbackStatus() {
   const isMounted = useIsMounted();
-  const [{ status, error }, setState] = React.useReducer(
-    (s, a) => ({ ...s, ...a }),
-    { status: "rest", error: null }
-  );
+  const [{ status, error }, setState] = useReducer((s, a) => ({ ...s, ...a }), {
+    status: "rest",
+    error: null,
+  });
 
   const safeSetState = (...args) =>
     isMounted.current ? setState(...args) : null;

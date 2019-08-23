@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 
-import React from "react";
+import React, { useState, useCallback, useEffect, Fragment } from "react";
 import debounceFn from "debounce-fn";
 import { useAsync } from "react-async";
 import { FaStar } from "react-icons/fa";
@@ -16,7 +16,7 @@ function updateRating([rating], { dispatch, listItem }) {
 }
 
 function Rating({ listItem }) {
-  const [isTabbing, setIsTabbing] = React.useState(false);
+  const [isTabbing, setIsTabbing] = useState(false);
 
   const dispatch = useListItemDispatch();
   const { isRejected, error, run } = useAsync({
@@ -25,9 +25,9 @@ function Rating({ listItem }) {
     listItem,
   });
 
-  const debouncedRun = React.useCallback(debounceFn(run, { wait: 300 }), []);
+  const debouncedRun = useCallback(debounceFn(run, { wait: 300 }), []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     function handleKeyDown(event) {
       if (event.key === "Tab") {
         setIsTabbing(true);
@@ -43,7 +43,7 @@ function Rating({ listItem }) {
     const ratingId = `rating-${listItem.id}-${i}`;
     const ratingValue = i + 1;
     return (
-      <React.Fragment key={i}>
+      <Fragment key={i}>
         <input
           className="visually-hidden"
           css={{
@@ -90,7 +90,7 @@ function Rating({ listItem }) {
             }}
           />
         </label>
-      </React.Fragment>
+      </Fragment>
     );
   });
   return (
