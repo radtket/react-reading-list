@@ -2,7 +2,7 @@
 import { jsx } from "@emotion/core";
 
 import { Link } from "@reach/router";
-import ListItemList from "../components/list-item-list";
+import ListItemList from "../components/ListItemList";
 
 function ReadingListScreen() {
   return (

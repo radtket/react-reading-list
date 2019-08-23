@@ -2,8 +2,9 @@
 import { jsx } from "@emotion/core";
 
 import { useListItemState } from "../context/list-item-context";
-import { BookListUL } from "./lib";
-import BookRow from "./book-row";
+
+import BookListUL from "../styles/BookListUL";
+import BookRow from "./BookRow";
 
 function ListItemList({ filterListItems, noListItems, noFilteredListItems }) {
   const listItems = useListItemState();

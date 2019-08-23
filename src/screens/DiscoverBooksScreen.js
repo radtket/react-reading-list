@@ -6,8 +6,9 @@ import Tooltip from "@reach/tooltip";
 import { FaSearch, FaTimes } from "react-icons/fa";
 import { useAsync } from "react-async";
 import * as booksClient from "../utils/books-client";
-import BookRow from "../components/book-row";
-import { BookListUL, Spinner } from "../components/lib";
+import BookRow from "../components/BookRow";
+import BookListUL from "../styles/BookListUL";
+import Spinner from "../components/Spinner";
 
 function initialSearch() {
   return booksClient.search("");
@@ -51,7 +52,8 @@ function DiscoverBooksScreen() {
                   marginLeft: "-35px",
                   background: "transparent",
                 }}
-                type="submit">
+                type="submit"
+              >
                 {isPending ? (
                   <Spinner />
                 ) : isRejected ? (
@@ -100,7 +102,8 @@ function DiscoverBooksScreen() {
             </BookListUL>
           ) : hasSearched ? (
             <div
-              css={{ marginTop: 20, fontSize: "1.2em", textAlign: "center" }}>
+              css={{ marginTop: 20, fontSize: "1.2em", textAlign: "center" }}
+            >
               <p>Hmmm... can't find any books</p>
               <p>Here, let me load a few books for you...</p>
               {isPending ? (

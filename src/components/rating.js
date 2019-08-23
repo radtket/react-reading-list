@@ -78,7 +78,8 @@ function Rating({ listItem }) {
             color: listItem.rating < 0 ? colors.gray20 : "orange",
             margin: 0,
           }}
-          htmlFor={ratingId}>
+          htmlFor={ratingId}
+        >
           <span className="visually-hidden">
             {ratingValue} {ratingValue === 1 ? "star" : "stars"}
           </span>
@@ -102,13 +103,15 @@ function Rating({ listItem }) {
           [`&.${rootClassName}:hover input + label`]: {
             color: "orange",
           },
-        }}>
+        }}
+      >
         <span
           css={{
             "& span:not(:last-child)": {
               marginRight: "5px",
             },
-          }}>
+          }}
+        >
           {stars}
         </span>
         {isRejected ? (
@@ -120,7 +123,8 @@ function Rating({ listItem }) {
                 overflow: "scroll",
                 margin: "0",
                 marginBottom: -5,
-              }}>
+              }}
+            >
               {error.message}
             </pre>
           </span>

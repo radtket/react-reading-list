@@ -1,12 +1,12 @@
 import React, { lazy, Suspense, useEffect } from "react";
-import { useUser } from "./context/user-context";
-import { FullPageSpinner } from "./components/lib";
+import { useUser } from "../context/user-context";
+import FullPageSpinner from "../components/FullPageSpinner";
 
-const loadAuthenticatedApp = () => import("./authenticated-app");
+const loadAuthenticatedApp = () => import("./AuthenticatedApp");
 const AuthenticatedApp = lazy(loadAuthenticatedApp);
-const UnauthenticatedApp = lazy(() => import("./unauthenticated-app"));
+const UnauthenticatedApp = lazy(() => import("./UnauthenticatedApp"));
 
-function App() {
+const App = () => {
   const user = useUser();
   // pre-load the authenticated side in the background while the user's
   // filling out the login form.
@@ -18,6 +18,6 @@ function App() {
       {user ? <AuthenticatedApp /> : <UnauthenticatedApp />}
     </Suspense>
   );
-}
+};
 
 export default App;

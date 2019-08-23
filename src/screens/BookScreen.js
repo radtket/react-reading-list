@@ -8,15 +8,15 @@ import { FaRegCalendarAlt } from "react-icons/fa";
 import Tooltip from "@reach/tooltip";
 import * as mq from "../styles/media-queries";
 import * as colors from "../styles/colors";
-import { Spinner } from "../components/lib";
+import Spinner from "../components/Spinner";
 import {
   useListItemDispatch,
   useSingleListItemState,
   updateListItem,
 } from "../context/list-item-context";
-import Rating from "../components/rating";
+import Rating from "../components/Rating";
 import * as bookClient from "../utils/books-client";
-import StatusButtons from "../components/status-buttons";
+import StatusButtons from "../components/StatusButtons";
 
 function getBook({ bookId }) {
   return bookClient.read(bookId).then(data => data.book);
@@ -72,7 +72,8 @@ function BookScreen({ bookId }) {
             display: "flex",
             flexDirection: "column",
           },
-        }}>
+        }}
+      >
         <img
           alt={`${title} book cover`}
           css={{
@@ -99,7 +100,8 @@ function BookScreen({ bookId }) {
                 flexDirection: "column",
                 justifyContent: "space-around",
                 minHeight: 100,
-              }}>
+              }}
+            >
               <StatusButtons book={book} />
             </div>
           </div>
@@ -110,7 +112,8 @@ function BookScreen({ bookId }) {
                 <Tooltip
                   label={
                     listItem.finishDate ? "Start and finish date" : "Start date"
-                  }>
+                  }
+                >
                   <div css={{ marginTop: 6 }}>
                     <FaRegCalendarAlt css={{ marginTop: -2, marginRight: 5 }} />
                     <span>
@@ -160,7 +163,8 @@ function NotesTextarea({ listItem }) {
             marginBottom: "0.5rem",
             fontWeight: "bold",
           }}
-          htmlFor="notes">
+          htmlFor="notes"
+        >
           Notes
         </label>
         {isRejected ? (
@@ -172,7 +176,8 @@ function NotesTextarea({ listItem }) {
                 overflow: "scroll",
                 margin: "0",
                 marginBottom: -5,
-              }}>
+              }}
+            >
               {error.message}
             </pre>
           </span>

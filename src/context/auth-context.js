@@ -6,11 +6,11 @@ import React from "react";
 import { useAsync } from "react-async";
 import { bootstrapAppData } from "../utils/bootstrap";
 import * as authClient from "../utils/auth-client";
-import { FullPageSpinner } from "../components/lib";
+import FullPageSpinner from "../components/FullPageSpinner";
 
 const AuthContext = React.createContext();
 
-function AuthProvider(props) {
+const AuthProvider = props => {
   const [firstAttemptFinished, setFirstAttemptFinished] = React.useState(false);
   const {
     data = { user: null, listItems: [] },
@@ -53,7 +53,7 @@ function AuthProvider(props) {
       {...props}
     />
   );
-}
+};
 
 function useAuth() {
   const context = React.useContext(AuthContext);
