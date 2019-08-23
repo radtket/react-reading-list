@@ -1,21 +1,26 @@
-/** @jsx jsx */
-import { jsx } from "@emotion/core";
-import { Link } from "@reach/router";
+import React from "react";
+import { Box, Container, Typography } from "@material-ui/core";
+import Link from "@material-ui/core/Link";
+import { Link as MuiLink } from "@reach/router";
 
 const NotFound = () => {
   return (
-    <div
-      css={{
-        height: "100%",
-        display: "grid",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
+    <Box
+      alignItems="center"
+      components={Container}
+      display="flex"
+      flexDirection="column"
+      height="100vh"
+      justifyContent="center"
+      textAlign="center"
     >
-      <div>
-        Sorry... nothing here. <Link to="/">Go home</Link>
-      </div>
-    </div>
+      <Typography gutterBottom variant="h6">
+        Sorry... nothing here.
+      </Typography>
+      <Link component={MuiLink} to="/" variant="body1">
+        Go home
+      </Link>
+    </Box>
   );
 };
 

@@ -54,13 +54,13 @@ const DiscoverBooksScreen = () => {
                 }}
                 type="submit"
               >
-                {isPending ? (
-                  <Spinner />
-                ) : isRejected ? (
-                  <FaTimes aria-label="error" css={{ color: "red" }} />
-                ) : (
-                  <FaSearch aria-label="search" />
-                )}
+                {isPending && <Spinner />}
+                {!isPending &&
+                  (isRejected ? (
+                    <FaTimes aria-label="error" css={{ color: "red" }} />
+                  ) : (
+                    <FaSearch aria-label="search" />
+                  ))}
               </button>
             </label>
           </Tooltip>
@@ -74,50 +74,50 @@ const DiscoverBooksScreen = () => {
         )}
       </div>
       <div>
-        {hasSearched ? null : (
+        {!hasSearched && (
           <div css={{ marginTop: 20, fontSize: "1.2em", textAlign: "center" }}>
             <p>Welcome to the discover page.</p>
             <p>Here, let me load a few books for you...</p>
-            {isPending ? (
+            {isPending && (
               <div css={{ width: "100%", margin: "auto" }}>
                 <Spinner />
               </div>
-            ) : isResolved && books.length ? (
-              <p>Here you go! Find more books with the search bar above.</p>
-            ) : isResolved && !books.length ? (
-              <p>
-                Hmmm... I couldn't find any books to suggest for you. Sorry.
-              </p>
-            ) : null}
-          </div>
-        )}
-        {isResolved &&
-          (books.length ? (
-            <BookListUL css={{ marginTop: 20 }}>
-              {books.map(book => (
-                <li key={book.id}>
-                  <BookRow key={book.id} book={book} />
-                </li>
-              ))}
-            </BookListUL>
-          ) : hasSearched ? (
-            <div
-              css={{ marginTop: 20, fontSize: "1.2em", textAlign: "center" }}
-            >
-              <p>Hmmm... can't find any books</p>
-              <p>Here, let me load a few books for you...</p>
-              {isPending ? (
-                <div css={{ width: "100%", margin: "auto" }}>
-                  <Spinner />
-                </div>
+            )}
+
+            {isResolved &&
+              (books.length ? (
+                <p>Here you go! Find more books with the search bar above.</p>
               ) : (
                 <p>
-                  Hmmm... I couldn't find any books with the query "{query}."
-                  Please try another.
+                  Hmmm... I couldn't find any books to suggest for you. Sorry.
                 </p>
-              )}
+              ))}
+          </div>
+        )}
+
+        {isResolved && books.length && (
+          <BookListUL css={{ marginTop: 20 }}>
+            {books.map(book => (
+              <li key={book.id}>
+                <BookRow key={book.id} book={book} />
+              </li>
+            ))}
+          </BookListUL>
+        )}
+
+        {isResolved &&
+          !books.length &&
+          hasSearched &&
+          (isPending ? (
+            <div css={{ width: "100%", margin: "auto" }}>
+              <Spinner />
             </div>
-          ) : null)}
+          ) : (
+            <p>
+              Hmmm... I couldn't find any books with the query "{query}." Please
+              try another.
+            </p>
+          ))}
       </div>
     </div>
   );

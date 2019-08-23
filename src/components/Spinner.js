@@ -1,4 +1,3 @@
-import React from "react";
 /** @jsx jsx */
 import { keyframes, jsx } from "@emotion/core";
 import { FaSpinner } from "react-icons/fa";

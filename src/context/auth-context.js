@@ -8,6 +8,7 @@ import React, {
   createContext,
   useLayoutEffect,
 } from "react";
+import { Box, Typography } from "@material-ui/core";
 import { useAsync } from "react-async";
 import bootstrapAppData from "../utils/bootstrapAppData";
 import * as authClient from "../utils/auth-client";
@@ -40,10 +41,12 @@ const AuthProvider = props => {
     }
     if (isRejected) {
       return (
-        <div css={{ color: "red" }}>
-          <p>Uh oh... There's a problem. Try refreshing the app.</p>
+        <Box color="text.error">
+          <Typography color="error" display="block" gutterBottom>
+            Uh oh... There's a problem. Try refreshing the app.
+          </Typography>
           <pre>{error.message}</pre>
-        </div>
+        </Box>
       );
     }
   }
