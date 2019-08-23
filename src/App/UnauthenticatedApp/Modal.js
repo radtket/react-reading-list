@@ -1,9 +1,7 @@
 import React, { useState, cloneElement } from "react";
-
-/** @jsx jsx */
-import { jsx } from "@emotion/core";
 import VisuallyHidden from "@reach/visually-hidden";
 import { Dialog } from "@reach/dialog";
+import { Box } from "@material-ui/core";
 import CircleButton from "../../styles/CircleButton";
 
 const Modal = ({ button, children }) => {
@@ -13,12 +11,12 @@ const Modal = ({ button, children }) => {
     <>
       {cloneElement(button, { onClick: () => setIsOpen(true) })}
       <Dialog isOpen={isOpen}>
-        <div css={{ display: "flex", justifyContent: "flex-end" }}>
+        <Box display="flex" justifyContent="flex-end">
           <CircleButton onClick={() => setIsOpen(false)}>
             <VisuallyHidden>Close</VisuallyHidden>
             <span aria-hidden>×</span>
           </CircleButton>
-        </div>
+        </Box>
         {children}
       </Dialog>
     </>

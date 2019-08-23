@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-
-/** @jsx jsx */
-import { jsx } from "@emotion/core";
-import { Typography, Button, TextField } from "@material-ui/core";
+import PropTypes from "prop-types";
+import { Box, Typography, Button, TextField } from "@material-ui/core";
 
 import Spinner from "../../components/Spinner";
 import useCallbackStatus from "../../utils/use-callback-status";
@@ -23,20 +21,13 @@ const LoginForm = ({ onSubmit, buttonText }) => {
       <Typography align="center" gutterBottom variant="h5">
         {buttonText}
       </Typography>
-      <form
-        css={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "stretch",
-          "> div": {
-            margin: "10px auto",
-            width: "100%",
-            maxWidth: "300px",
-          },
-        }}
+      <Box
+        alignItems="stretch"
+        component="form"
+        display="flex"
+        flexDirection="column"
         onSubmit={e => {
           e.preventDefault();
-
           run(
             onSubmit({
               ...values,
@@ -55,17 +46,24 @@ const LoginForm = ({ onSubmit, buttonText }) => {
           onChange={handleChange("password")}
           value={values.password}
         />
-        <div>
+        <Box my={2}>
           <Button color="primary" type="submit" variant="contained">
-            {buttonText} {isPending && <Spinner css={{ marginLeft: 5 }} />}
+            {buttonText} {isPending && <Spinner style={{ marginLeft: 5 }} />}
           </Button>
-        </div>
+        </Box>
         {isRejected && (
-          <div css={{ color: "red" }}>{error && error.message}</div>
+          <Typography color="error" variant="overline">
+            {error && error.message}
+          </Typography>
         )}
-      </form>
+      </Box>
     </>
   );
+};
+
+LoginForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+  buttonText: PropTypes.string.isRequired,
 };
 
 export default LoginForm;
