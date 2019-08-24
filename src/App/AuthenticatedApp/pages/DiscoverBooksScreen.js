@@ -1,16 +1,16 @@
+import React, { useState } from "react";
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
-
-import React, { useState } from "react";
 import Tooltip from "@reach/tooltip";
 import { FaSearch, FaTimes } from "react-icons/fa";
 import { useAsync } from "react-async";
 import Grid from "@material-ui/core/Grid";
 import * as booksClient from "../../../utils/books-client";
-import BookRow from "../../../components/BookRow";
-import BookListUL from "../../../styles/BookListUL";
 import Spinner from "../../../components/Spinner";
 import BookCard from "../../../components/BookCard";
+
+// import BookRow from "../../../components/BookRow";
+// import BookListUL from "../../../styles/BookListUL";
 
 const initialSearch = () => {
   return booksClient.search("");

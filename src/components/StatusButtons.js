@@ -10,6 +10,7 @@ import {
 } from "react-icons/fa";
 
 import Tooltip from "@reach/tooltip";
+import styled from "@emotion/styled";
 import Spinner from "./Spinner";
 import * as colors from "../styles/colors";
 import { useUser } from "../context/user-context";
@@ -21,7 +22,21 @@ import {
   addListItem,
 } from "../context/list-item-context";
 import useCallbackStatus from "../utils/use-callback-status";
-import CircleButton from "../styles/CircleButton";
+
+const CircleButton = styled.button({
+  borderRadius: "30px",
+  padding: "0",
+  width: "40px",
+  height: "40px",
+  lineHeight: "1",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  background: colors.base,
+  color: colors.text,
+  border: `1px solid ${colors.gray10}`,
+  cursor: "pointer",
+});
 
 const TooltipButton = ({ label, highlight, onClick, icon, ...rest }) => {
   const { isPending, isRejected, error, run } = useCallbackStatus();
