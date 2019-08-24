@@ -5,10 +5,12 @@ import React, { useState } from "react";
 import Tooltip from "@reach/tooltip";
 import { FaSearch, FaTimes } from "react-icons/fa";
 import { useAsync } from "react-async";
+import Grid from "@material-ui/core/Grid";
 import * as booksClient from "../../../utils/books-client";
 import BookRow from "../../../components/BookRow";
 import BookListUL from "../../../styles/BookListUL";
 import Spinner from "../../../components/Spinner";
+import BookCard from "../../../components/BookCard";
 
 const initialSearch = () => {
   return booksClient.search("");
@@ -96,6 +98,16 @@ const DiscoverBooksScreen = () => {
         )}
 
         {isResolved && books.length && (
+          <Grid container spacing={3}>
+            {books.map(book => (
+              <Grid key={book.id} item xs={3}>
+                <BookCard {...{ book }} />
+              </Grid>
+            ))}
+          </Grid>
+        )}
+
+        {/* {isResolved && books.length && (
           <BookListUL css={{ marginTop: 20 }}>
             {books.map(book => (
               <li key={book.id}>
@@ -103,7 +115,7 @@ const DiscoverBooksScreen = () => {
               </li>
             ))}
           </BookListUL>
-        )}
+        )} */}
 
         {isResolved &&
           !books.length &&

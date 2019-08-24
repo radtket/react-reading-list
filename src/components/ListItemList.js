@@ -1,10 +1,12 @@
-/** @jsx jsx */
-import { jsx } from "@emotion/core";
+import React from "react";
+import PropTypes from "prop-types";
 
+import { Box, Grid, Typography } from "@material-ui/core";
 import { useListItemState } from "../context/list-item-context";
-
-import BookListUL from "../styles/BookListUL";
-import BookRow from "./BookRow";
+import BookCard from "./BookCard";
+import { isArrayEmpty } from "../utils/helpers";
+// import BookListUL from "../styles/BookListUL";
+// import BookRow from "./BookRow";
 
 const ListItemList = ({
   filterListItems,
@@ -14,30 +16,53 @@ const ListItemList = ({
   const listItems = useListItemState();
   const filteredListItems = listItems.filter(filterListItems);
 
-  if (!listItems.length) {
+  if (isArrayEmpty(listItems)) {
     return (
-      <div css={{ marginTop: "1em", fontSize: "1.2em" }}>{noListItems}</div>
+      <Box mt={1.5}>
+        <Typography gutterBottom variant="h6">
+          {noListItems}
+        </Typography>
+      </Box>
     );
   }
-  if (!filteredListItems.length) {
+
+  if (isArrayEmpty(filteredListItems)) {
     return (
-      <div css={{ marginTop: "1em", fontSize: "1.2em" }}>
-        {noFilteredListItems}
-      </div>
+      <Box mt={1.5}>
+        <Typography gutterBottom variant="h6">
+          {noFilteredListItems}
+        </Typography>
+      </Box>
     );
   }
 
   return (
-    <div css={{ marginTop: "1em" }}>
-      <BookListUL>
+    <Box mt={1.5}>
+      <Grid container spacing={3}>
+        {filteredListItems.map(listItem => {
+          const { id } = listItem;
+          return (
+            <Grid key={id} item xs>
+              <BookCard {...listItem} />
+            </Grid>
+          );
+        })}
+      </Grid>
+      {/* <BookListUL>
         {filteredListItems.map(listItem => (
           <li key={listItem.id}>
             <BookRow book={listItem.book} />
           </li>
         ))}
-      </BookListUL>
-    </div>
+      </BookListUL> */}
+    </Box>
   );
+};
+
+ListItemList.propTypes = {
+  filterListItems: PropTypes.func.isRequired,
+  noListItems: PropTypes.node.isRequired,
+  noFilteredListItems: PropTypes.node.isRequired,
 };
 
 export default ListItemList;
