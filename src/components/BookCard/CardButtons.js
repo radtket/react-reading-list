@@ -2,8 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import { CardActions, IconButton, Tooltip } from "@material-ui/core";
 import { Book, Check, Add, Remove } from "@material-ui/icons";
-
-import * as colors from "../../styles/colors";
 import { useUser } from "../../context/user-context";
 import {
   addListItem,
@@ -43,7 +41,7 @@ const CardButtons = ({ bookId }) => {
           <Tooltip title="Unmark as read">
             <IconButton
               aria-label="Unmark as read"
-              highlight={colors.yellow}
+              // highlight={colors.yellow}
               onClick={handleMarkAsUnreadClick}
             >
               <Book />
@@ -53,7 +51,7 @@ const CardButtons = ({ bookId }) => {
           <Tooltip title="Mark as read">
             <IconButton
               aria-label="Mark as read"
-              highlight={colors.green}
+              // highlight={colors.green}
               onClick={handleMarkAsReadClick}
             >
               <Check />
@@ -64,7 +62,7 @@ const CardButtons = ({ bookId }) => {
         <Tooltip title="Remove from list">
           <IconButton
             aria-label="Remove from list"
-            highlight={colors.danger}
+            // highlight={colors.danger}
             onClick={handleRemoveClick}
           >
             <Remove />
@@ -74,7 +72,7 @@ const CardButtons = ({ bookId }) => {
         <Tooltip title="Add to list">
           <IconButton
             aria-label="Add to list"
-            highlight={colors.indigo}
+            // highlight={colors.indigo}
             onClick={handleAddClick}
           >
             <Add />

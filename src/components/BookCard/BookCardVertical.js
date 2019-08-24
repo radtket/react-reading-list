@@ -21,7 +21,7 @@ const useStyles = makeStyles({
   },
 });
 
-const BookCard = ({ book }) => {
+const BookCardVertical = ({ book }) => {
   const {
     author,
     coverImageUrl,
@@ -36,7 +36,6 @@ const BookCard = ({ book }) => {
   const listItem = useSingleListItemState({
     bookId,
   });
-
   return (
     <Card>
       <CardActionArea>
@@ -65,7 +64,7 @@ const BookCard = ({ book }) => {
   );
 };
 
-BookCard.propTypes = {
+BookCardVertical.propTypes = {
   book: PropTypes.shape({
     title: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     author: PropTypes.string,
@@ -77,4 +76,4 @@ BookCard.propTypes = {
   }).isRequired,
 };
 
-export default BookCard;
+export default BookCardVertical;

@@ -3,10 +3,8 @@ import PropTypes from "prop-types";
 
 import { Box, Grid, Typography } from "@material-ui/core";
 import { useListItemState } from "../context/list-item-context";
-import BookCard from "./BookCard";
+import BookCardVertical from "./BookCard/BookCardVertical";
 import { isArrayEmpty } from "../utils/helpers";
-// import BookListUL from "../styles/BookListUL";
-// import BookRow from "./BookRow";
 
 const ListItemList = ({
   filterListItems,
@@ -43,18 +41,11 @@ const ListItemList = ({
           const { id } = listItem;
           return (
             <Grid key={id} item xs>
-              <BookCard {...listItem} />
+              <BookCardVertical {...listItem} />
             </Grid>
           );
         })}
       </Grid>
-      {/* <BookListUL>
-        {filteredListItems.map(listItem => (
-          <li key={listItem.id}>
-            <BookRow book={listItem.book} />
-          </li>
-        ))}
-      </BookListUL> */}
     </Box>
   );
 };

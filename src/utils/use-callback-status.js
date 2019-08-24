@@ -1,4 +1,4 @@
-import React, { useRef, useLayoutEffect, useReducer } from "react";
+import { useRef, useLayoutEffect, useReducer } from "react";
 
 function useIsMounted() {
   const mounted = useRef(false);

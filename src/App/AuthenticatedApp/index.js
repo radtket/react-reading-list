@@ -5,7 +5,7 @@ import { Link } from "@reach/router";
 import {
   AppBar,
   Button,
-  CssBaseline,
+  Box,
   Divider,
   Drawer,
   List,
@@ -26,12 +26,6 @@ import Routes from "./routes";
 const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    display: "flex",
-  },
-  title: {
-    flexGrow: 1,
-  },
   appBar: {
     width: `calc(100% - ${drawerWidth}px)`,
     marginLeft: drawerWidth,
@@ -52,32 +46,36 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const AuthenticatedApp = () => {
-  const classes = useStyles();
-  const user = useUser();
+  const { appBar, drawer, drawerPaper, toolbar, content } = useStyles();
+  const { username } = useUser();
   const { logout } = useAuth();
 
   return (
-    <div className={classes.root}>
-      <CssBaseline />
-      <AppBar className={classes.appBar} position="fixed">
+    <Box display="flex">
+      <AppBar className={appBar} position="fixed">
         <Toolbar>
-          <Typography className={classes.title} variant="h6">
-            {user.username}
+          <Typography
+            style={{
+              flexGrow: 1,
+            }}
+            variant="h6"
+          >
+            {username}
           </Typography>
           <Button color="inherit" onClick={logout}>
-            Login
+            Logout
           </Button>
         </Toolbar>
       </AppBar>
       <Drawer
         anchor="left"
         classes={{
-          paper: classes.drawerPaper,
+          paper: drawerPaper,
         }}
-        className={classes.drawer}
+        className={drawer}
         variant="permanent"
       >
-        <div className={classes.toolbar} />
+        <div className={toolbar} />
         <Divider />
         <List>
           <ListItem button component={Link} to="/list">
@@ -100,11 +98,11 @@ const AuthenticatedApp = () => {
           </ListItem>
         </List>
       </Drawer>
-      <main className={classes.content}>
-        <div className={classes.toolbar} />
+      <main className={content}>
+        <div className={toolbar} />
         <Routes />
       </main>
-    </div>
+    </Box>
   );
 };
 
