@@ -12,7 +12,7 @@ const useStyles = makeStyles({
     padding: "2px 4px",
     display: "flex",
     alignItems: "center",
-    width: 400,
+    // width: 400,
   },
   input: {
     marginLeft: 8,
@@ -56,7 +56,7 @@ const SearchBar = ({
       {isRejected && <ErrorMessage {...{ error }} />}
       {/* <form onSubmit={handleSearchClick}>
           <input
-            css={{ width: "100%" }}
+            style={{ width: "100%" }}
             id="search"
             onChange={handleInputChange}
             placeholder="Search books..."
@@ -64,7 +64,7 @@ const SearchBar = ({
           <Tooltip label="Search Books">
             <label htmlFor="search">
               <button
-                css={{
+                style={{
                   border: "0",
                   position: "relative",
                   marginLeft: "-35px",
@@ -75,7 +75,7 @@ const SearchBar = ({
                 {isPending && <Spinner />}
                 {!isPending &&
                   (isRejected ? (
-                    <FaTimes aria-label="error" css={{ color: "red" }} />
+                    <FaTimes aria-label="error" style={{ color: "red" }} />
                   ) : (
                     <FaSearch aria-label="search" />
                   ))}

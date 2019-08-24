@@ -7,6 +7,7 @@ import {
   useListItemDispatch,
   updateListItem,
 } from "../../context/list-item-context";
+import ErrorMessage from "../ErrorMessage";
 
 const updateRating = ([rating], { dispatch, listItem }) => {
   return updateListItem(dispatch, listItem.id, { rating });
@@ -51,21 +52,7 @@ const CardRating = ({
         }}
         value={value}
       />
-      {isRejected && (
-        <span style={{ color: "red", fontSize: "0.7em" }}>
-          <span>There was an error:</span>{" "}
-          <pre
-            style={{
-              display: "inline-block",
-              overflow: "scroll",
-              margin: "0",
-              marginBottom: -5,
-            }}
-          >
-            {error.message}
-          </pre>
-        </span>
-      )}
+      {isRejected && <ErrorMessage error={error} />}
     </>
   );
 };

@@ -1,11 +1,15 @@
 import React from "react";
-import { Box } from "@material-ui/core";
-import Spinner from "./Spinner";
+import { Box, CircularProgress } from "@material-ui/core";
 
-const FullPageSpinner = () => {
+const FullPageSpinner = ({ size = 48 }) => {
   return (
-    <Box fontSize="4em" marginTop="3em">
-      <Spinner />
+    <Box
+      alignItems="center"
+      display="flex"
+      height="calc(100vh - 80px)"
+      justifyContent="center"
+    >
+      <CircularProgress {...{ size }} />
     </Box>
   );
 };

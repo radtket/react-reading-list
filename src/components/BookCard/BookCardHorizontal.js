@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  Box,
   Card,
   CardContent,
   CardMedia,
@@ -62,7 +63,9 @@ const BookCardHorizontal = ({
           </Typography>
           <Typography color="textSecondary" variant="subtitle1">
             {author}
-            <span style={{ marginRight: 6, marginLeft: 6 }}>|</span>
+            <Box component="span" mx={1}>
+              |
+            </Box>
             {publisher}
           </Typography>
 

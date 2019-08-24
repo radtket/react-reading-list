@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useAsync } from "react-async";
-import Grid from "@material-ui/core/Grid";
+import { Box, Grid, Typography } from "@material-ui/core";
 import * as booksClient from "../../../utils/books-client";
 import Spinner from "../../../components/Spinner";
 import BookCardVertical from "../../../components/BookCard/BookCardVertical";
@@ -29,8 +29,6 @@ const DiscoverBooksScreen = () => {
     run(query);
   };
 
-  console.log({ query });
-
   return (
     <div>
       <div>
@@ -46,26 +44,27 @@ const DiscoverBooksScreen = () => {
       </div>
       <div>
         {!hasSearched && (
-          <div
-            style={{ marginTop: 20, fontSize: "1.2em", textAlign: "center" }}
-          >
-            <p>Welcome to the discover page.</p>
-            <p>Here, let me load a few books for you...</p>
+          <Box mt={3} textAlign="center">
+            <Typography variant="body1">
+              Welcome to the discover page.
+            </Typography>
+            <Typography variant="body1">
+              Here, let me load a few books for you...
+            </Typography>
             {isPending && (
-              <div style={{ width: "100%", margin: "auto" }}>
+              <Box m="auto" width={1}>
                 <Spinner />
-              </div>
+              </Box>
             )}
 
-            {isResolved &&
-              (books.length ? (
-                <p>Here you go! Find more books with the search bar above.</p>
-              ) : (
-                <p>
-                  Hmmm... I couldn't find any books to suggest for you. Sorry.
-                </p>
-              ))}
-          </div>
+            {isResolved && (
+              <Typography>
+                {books.length
+                  ? "Here you go! Find more books with the search bar above."
+                  : "Hmmm... I couldn't find any books to suggest for you. Sorry."}
+              </Typography>
+            )}
+          </Box>
         )}
 
         {isResolved && books.length && (
@@ -82,14 +81,14 @@ const DiscoverBooksScreen = () => {
           !books.length &&
           hasSearched &&
           (isPending ? (
-            <div style={{ width: "100%", margin: "auto" }}>
+            <Box m="auto" width={1}>
               <Spinner />
-            </div>
+            </Box>
           ) : (
-            <p>
+            <Typography variant="body1">
               Hmmm... I couldn't find any books with the query "{query}." Please
               try another.
-            </p>
+            </Typography>
           ))}
       </div>
     </div>
