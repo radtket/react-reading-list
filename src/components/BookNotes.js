@@ -2,7 +2,7 @@ import React, { useCallback } from "react";
 import PropTypes from "prop-types";
 import { useAsync } from "react-async";
 import debounceFn from "debounce-fn";
-import TextField from "@material-ui/core/TextField";
+import { TextField } from "@material-ui/core";
 import Spinner from "./Spinner";
 import {
   useListItemDispatch,

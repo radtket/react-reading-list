@@ -2,9 +2,14 @@ import React, { useState } from "react";
 import { useAsync } from "react-async";
 import { Box, Grid, Typography } from "@material-ui/core";
 import * as booksClient from "../../../utils/books-client";
-import Spinner from "../../../components/Spinner";
-import BookCardVertical from "../../../components/BookCard/BookCardVertical";
-import SearchBar from "../../../components/SearchBar";
+
+// Components
+import {
+  BookCardVertical,
+  // ErrorMessage,
+  SearchBar,
+  Spinner,
+} from "../../../components";
 
 const initialSearch = () => {
   return booksClient.search("");

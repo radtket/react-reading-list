@@ -6,10 +6,12 @@ import { useSingleListItemState } from "../../../context/list-item-context";
 import * as bookClient from "../../../utils/books-client";
 
 // Components
-import BookNotes from "../../../components/BookNotes";
-import BookCardHorizontal from "../../../components/BookCard/BookCardHorizontal";
-import ErrorMessage from "../../../components/ErrorMessage";
-import FullPageSpinner from "../../../components/FullPageSpinner";
+import {
+  BookCardHorizontal,
+  BookNotes,
+  ErrorMessage,
+  FullPageSpinner,
+} from "../../../components";
 
 const getBook = ({ bookId }) => {
   return bookClient.read(bookId).then(data => data.book);

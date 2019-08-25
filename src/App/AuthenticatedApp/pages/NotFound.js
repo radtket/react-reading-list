@@ -1,6 +1,5 @@
 import React from "react";
-import { Box, Container, Typography } from "@material-ui/core";
-import Link from "@material-ui/core/Link";
+import { Box, Container, Link, Typography } from "@material-ui/core";
 import { Link as MuiLink } from "@reach/router";
 
 const NotFound = () => {

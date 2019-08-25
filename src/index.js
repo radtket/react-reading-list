@@ -8,7 +8,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "typeface-roboto";
 import { ThemeProvider } from "@material-ui/styles";
-import { createMuiTheme } from "@material-ui/core/styles";
+import { createMuiTheme } from "@material-ui/core";
 import App from "./App";
 import AppProviders from "./context";
 

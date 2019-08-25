@@ -11,9 +11,10 @@ import {
   TextField,
 } from "@material-ui/core";
 
-import useCallbackStatus from "../../utils/use-callback-status";
-import Spinner from "../../components/Spinner";
+// Components
+import { Spinner } from "../../components";
 
+import useCallbackStatus from "../../utils/use-callback-status";
 import { slugify } from "../../utils/helpers";
 
 const FormDialog = ({ button, buttonText, handleSubmit }) => {

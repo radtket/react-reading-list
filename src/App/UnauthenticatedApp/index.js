@@ -1,10 +1,10 @@
 import React from "react";
 import { Box, Container, Button, Typography } from "@material-ui/core";
-import Logo from "../../components/Logo";
 import { useAuth } from "../../context/auth-context";
 
 // Components
 import FormDialog from "./FormDialog";
+import { Logo } from "../../components";
 
 const UnauthenticatedApp = () => {
   const { login, register } = useAuth();
