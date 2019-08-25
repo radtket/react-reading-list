@@ -12,7 +12,7 @@ import {
 } from "../../context/list-item-context";
 
 const CardButtons = ({ bookId }) => {
-  const user = useUser();
+  const { id: ownerId } = useUser();
   const dispatch = useListItemDispatch();
   const listItem = useSingleListItemState({
     bookId,
@@ -27,7 +27,7 @@ const CardButtons = ({ bookId }) => {
   };
 
   const handleAddClick = () => {
-    return addListItem(dispatch, { ownerId: user.id, bookId });
+    return addListItem(dispatch, { ownerId, bookId });
   };
 
   const handleMarkAsUnreadClick = () => {

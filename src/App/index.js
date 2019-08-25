@@ -1,8 +1,10 @@
 import React, { lazy, Suspense, useEffect } from "react";
-import { useUser } from "../context/user-context";
 
 // Components
 import { FullPageSpinner } from "../components";
+
+// Context
+import { useUser } from "../context/user-context";
 
 const loadAuthenticatedApp = () => import("./AuthenticatedApp");
 const AuthenticatedApp = lazy(loadAuthenticatedApp);

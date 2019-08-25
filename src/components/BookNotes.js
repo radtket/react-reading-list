@@ -3,12 +3,15 @@ import PropTypes from "prop-types";
 import { useAsync } from "react-async";
 import debounceFn from "debounce-fn";
 import { TextField } from "@material-ui/core";
+
+// Components
+import ErrorMessage from "./ErrorMessage";
 import Spinner from "./Spinner";
+
 import {
   useListItemDispatch,
   updateListItem,
 } from "../context/list-item-context";
-import ErrorMessage from "./ErrorMessage";
 import { PropTypesBook } from "../types";
 
 const updateNotes = ([notes], { dispatch, listItem }) => {

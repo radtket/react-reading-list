@@ -1,9 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-
 import { Box, Grid, Typography } from "@material-ui/core";
-import { useListItemState } from "../context/list-item-context";
+
+// Components
 import BookCardVertical from "./BookCard/BookCardVertical";
+
+import { useListItemState } from "../context/list-item-context";
 import { isArrayEmpty } from "../utils/helpers";
 
 const ListItemList = ({
