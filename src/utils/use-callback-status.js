@@ -1,15 +1,15 @@
 import { useRef, useLayoutEffect, useReducer } from "react";
 
-function useIsMounted() {
+const useIsMounted = () => {
   const mounted = useRef(false);
   useLayoutEffect(() => {
     mounted.current = true;
     return () => (mounted.current = false);
   }, []);
   return mounted;
-}
+};
 
-function useCallbackStatus() {
+const useCallbackStatus = () => {
   const isMounted = useIsMounted();
   const [{ status, error }, setState] = useReducer((s, a) => ({ ...s, ...a }), {
     status: "rest",
@@ -22,7 +22,7 @@ function useCallbackStatus() {
   const isPending = status === "pending";
   const isRejected = status === "rejected";
 
-  function run(promise) {
+  const run = promise => {
     if (!promise || !promise.then) {
       throw new Error(
         `The argument passed to useCallbackStatus().run must be a promise. Maybe a function that's passed isn't returning anything?`
@@ -34,12 +34,12 @@ function useCallbackStatus() {
         safeSetState({ status: "rest" });
         return value;
       },
-      error => {
-        safeSetState({ status: "rejected", error });
-        return Promise.reject(error);
+      err => {
+        safeSetState({ status: "rejected", error: err });
+        return Promise.reject(err);
       }
     );
-  }
+  };
 
   return {
     isPending,
@@ -48,6 +48,6 @@ function useCallbackStatus() {
     status,
     run,
   };
-}
+};
 
 export default useCallbackStatus;

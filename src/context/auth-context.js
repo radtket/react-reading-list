@@ -4,15 +4,20 @@ import React, {
   createContext,
   useLayoutEffect,
 } from "react";
+import PropTypes from "prop-types";
 import { Box, Typography } from "@material-ui/core";
 import { useAsync } from "react-async";
+
+// Components
+import FullPageSpinner from "../components/FullPageSpinner";
+
+// Utils
 import bootstrapAppData from "../utils/bootstrapAppData";
 import * as authClient from "../utils/auth-client";
-import FullPageSpinner from "../components/FullPageSpinner";
 
 const AuthContext = createContext();
 
-const AuthProvider = props => {
+const AuthProvider = ({ children }) => {
   const [firstAttemptFinished, setFirstAttemptFinished] = useState(false);
   const {
     data = { user: null, listItems: [] },
@@ -52,10 +57,9 @@ const AuthProvider = props => {
   const logout = () => authClient.logout().then(reload);
 
   return (
-    <AuthContext.Provider
-      value={{ data, login, logout, register }}
-      {...props}
-    />
+    <AuthContext.Provider value={{ data, login, logout, register }}>
+      {children}
+    </AuthContext.Provider>
   );
 };
 
@@ -65,6 +69,10 @@ const useAuth = () => {
     throw new Error(`useAuth must be used within a AuthProvider`);
   }
   return context;
+};
+
+AuthProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
 export { AuthProvider, useAuth };

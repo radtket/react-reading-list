@@ -1,6 +1,11 @@
 import React, { createContext, useReducer, useContext } from "react";
+import PropTypes from "prop-types";
+
+// Context
 import { useAuth } from "./auth-context";
 import { useUser } from "./user-context";
+
+// Client
 import * as listItemClient from "../utils/list-items-client";
 
 const ListItemStateContext = createContext();
@@ -41,6 +46,10 @@ const ListItemProvider = ({ children }) => {
       </ListItemDispatchContext.Provider>
     </ListItemStateContext.Provider>
   );
+};
+
+ListItemProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
 const removeListItem = (dispatch, id) => {
