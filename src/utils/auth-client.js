@@ -1,6 +1,5 @@
 import client from "./api-client";
-
-const localStorageKey = "__bookshelf_token__";
+import { localStorageKey } from "./constants";
 
 const handleUserResponse = ({ user: { token, ...user } }) => {
   window.localStorage.setItem(localStorageKey, token);

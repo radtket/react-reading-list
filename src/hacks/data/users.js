@@ -1,5 +1,6 @@
+import { usersKey, siteKey } from "../../utils/constants";
+
 // istanbul ignore file
-const usersKey = "__bookshelf_users__";
 const users = {};
 const persist = () =>
   window.localStorage.setItem(usersKey, JSON.stringify(users));
@@ -14,8 +15,8 @@ try {
   // ignore json parse error
 }
 
-window.__bookshelf = window.__bookshelf || {};
-window.__bookshelf.purgeUsers = () => {
+window[siteKey] = window[siteKey] || {};
+window[siteKey].purgeUsers = () => {
   Object.keys(users).forEach(key => {
     delete users[key];
   });

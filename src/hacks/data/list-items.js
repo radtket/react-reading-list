@@ -1,6 +1,6 @@
-/* eslint-disable no-underscore-dangle */
+import { listItemsKey, siteKey } from "../../utils/constants";
+
 // istanbul ignore file
-const listItemsKey = "__bookshelf_list_items__";
 const listItems = {};
 const persist = () =>
   window.localStorage.setItem(listItemsKey, JSON.stringify(listItems));
@@ -18,8 +18,8 @@ try {
   // ignore json parse error
 }
 
-window.__bookshelf = window.__bookshelf || {};
-window.__bookshelf.purgeListItems = () => {
+window[siteKey] = window[siteKey] || {};
+window[siteKey].purgeListItems = () => {
   Object.keys(listItems).forEach(key => {
     delete listItems[key];
   });
