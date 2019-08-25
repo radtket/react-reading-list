@@ -22,16 +22,16 @@ window.__bookshelf.purgeUsers = () => {
   persist();
 };
 
-function authenticate({ username, password }) {
+const authenticate = ({ username, password }) => {
   const id = hash(username);
   const user = users[id] || {};
   if (user.passwordHash === hash(password)) {
     return { ...user, token: btoa(user.id) };
   }
   throw new Error("Invalid username or password");
-}
+};
 
-function create({ username, password }) {
+const create = ({ username, password }) => {
   const id = hash(username);
   const passwordHash = hash(password);
   if (users[id]) {
@@ -39,36 +39,36 @@ function create({ username, password }) {
   }
   users[id] = { id, username, passwordHash };
   persist();
-}
+};
 
-function read(id) {
+const read = id => {
   validateUser(id);
   const { passwordHash, ...user } = users[id];
   return user;
-}
+};
 
-function update(id, updates) {
+const update = (id, updates) => {
   validateUser(id);
   Object.assign(users[id], updates);
   persist();
   return read(id);
-}
+};
 
 // this would be called `delete` except that's a reserved word in JS :-(
-function remove(id) {
+const remove = id => {
   validateUser(id);
   delete users[id];
   persist();
-}
+};
 
-function validateUser(id) {
+const validateUser = id => {
   load();
   if (!users[id]) {
     throw new Error(`No user with the id "${id}"`);
   }
-}
+};
 
-function hash(str) {
+const hash = str => {
   let hash = 5381;
   let i = str.length;
 
@@ -76,6 +76,6 @@ function hash(str) {
     hash = (hash * 33) ^ str.charCodeAt(--i);
   }
   return String(hash >>> 0);
-}
+};
 
 export { authenticate, create, read, update, remove };

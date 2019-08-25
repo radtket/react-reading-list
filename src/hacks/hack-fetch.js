@@ -14,6 +14,7 @@ const sleep = (t = Math.random() * 200 + 300) =>
   new Promise(resolve => setTimeout(resolve, t));
 
 const apiUrl = new window.URL(process.env.REACT_APP_API_URL);
+
 const isApi = (endpoint, method = "GET", queryParam) => (url, config) => {
   const { origin, pathname, search } = new window.URL(url);
   return (
@@ -213,24 +214,24 @@ const fakeResponses = [
   },
 ];
 
-function getBooksNotInUsersList(userId) {
+const getBooksNotInUsersList = userId => {
   const bookIdsInUsersList = listItems.readByOwner(userId).map(li => li.bookId);
   return allBooks.filter(book => !bookIdsInUsersList.includes(book.id));
-}
+};
 
-function shuffle(array) {
+const shuffle = array => {
   return [...array].sort(() => Math.random() - 0.5);
-}
+};
 
-function getSubjectId(url) {
+const getSubjectId = url => {
   const { pathname } = new URL(url);
   return pathname
     .split("/")
     .filter(Boolean)
     .slice(-1)[0];
-}
+};
 
-function getUser(config) {
+const getUser = config => {
   const token = config.headers.Authorization.replace("Bearer ", "");
   if (!token) {
     throw new Error("A token must be provided");
@@ -242,7 +243,7 @@ function getUser(config) {
     throw new Error("Invalid token. Please login again.");
   }
   return users.read(userId);
-}
+};
 
 window.fetch = async (...args) => {
   const { handler } = fakeResponses.find(({ test }) => {

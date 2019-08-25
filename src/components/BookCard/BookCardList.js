@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import {
   List,
   ListItem,
@@ -43,6 +44,20 @@ const BookCardList = ({ listItem }) => {
       </ListItem>
     </List>
   );
+};
+
+BookCardList.propTypes = {
+  listItem: PropTypes.shape({
+    finishDate: PropTypes.number,
+    startDate: PropTypes.number,
+  }),
+};
+
+BookCardList.defaultProps = {
+  listItem: {
+    finishDate: null,
+    startDate: null,
+  },
 };
 
 export default BookCardList;

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { useAsync } from "react-async";
 import { Grid, Typography } from "@material-ui/core";
 
@@ -43,7 +44,7 @@ const BookScreen = ({ bookId }) => {
   return (
     <Grid container spacing={3}>
       <Grid item xs={6}>
-        <BookCardHorizontal {...book} listItem={listItem} />
+        <BookCardHorizontal book={book} listItem={listItem} />
       </Grid>
 
       <Grid item xs={6}>
@@ -51,6 +52,14 @@ const BookScreen = ({ bookId }) => {
       </Grid>
     </Grid>
   );
+};
+
+BookScreen.propTypes = {
+  bookId: PropTypes.string,
+};
+
+BookScreen.defaultProps = {
+  bookId: null,
 };
 
 export default BookScreen;

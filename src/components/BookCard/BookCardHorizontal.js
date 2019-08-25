@@ -1,4 +1,5 @@
 import React from "react";
+// import PropTypes from "prop-types";
 import {
   Box,
   Card,
@@ -11,6 +12,7 @@ import {
 // Components
 import CardButtons from "./CardButtons";
 import BookCardList from "./BookCardList";
+import { PropTypesBook } from "../../types";
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -28,16 +30,18 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const BookCardHorizontal = ({
-  title,
-  author,
-  coverImageUrl,
-  publisher,
-  synopsis,
-  id,
-  listItem,
-}) => {
+const BookCardHorizontal = ({ book, listItem }) => {
   const classes = useStyles();
+  const {
+    author,
+    coverImageUrl,
+    id,
+    // listItem,
+    publisher,
+    synopsis,
+    title,
+  } = book;
+
   return (
     <Card className={classes.card}>
       <CardMedia
@@ -66,6 +70,20 @@ const BookCardHorizontal = ({
       </div>
     </Card>
   );
+};
+
+BookCardHorizontal.propTypes = {
+  book: PropTypesBook.isRequired,
+  // listItem: PropTypes.shape({
+  //   book: PropTypesBook,
+  //   bookId: PropTypes.shape,
+  //   finishDate: PropTypes.number,
+  //   id: PropTypes.shape,
+  //   notes: PropTypes.shape,
+  //   ownerId: PropTypes.shape,
+  //   rating: PropTypes.number,
+  //   startDate: PropTypes.number,
+  // }).isRequired,
 };
 
 export default BookCardHorizontal;

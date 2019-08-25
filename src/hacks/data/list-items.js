@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 // istanbul ignore file
 const listItemsKey = "__bookshelf_list_items__";
 const listItems = {};
@@ -25,21 +26,21 @@ window.__bookshelf.purgeListItems = () => {
   persist();
 };
 
-function authorize(userId, listItemId) {
+const authorize = (userId, listItemId) => {
   const listItem = read(listItemId);
   if (listItem.ownerId !== userId) {
     throw new Error("User is not authorized to view that list");
   }
-}
+};
 
-function create({
+const create = ({
   bookId = required("bookId"),
   ownerId = required("ownerId"),
   rating = -1,
   notes = "",
   startDate = Date.now(),
   finishDate = null,
-}) {
+}) => {
   const id = hash(`${bookId}${ownerId}`);
   if (listItems[id]) {
     throw new Error(`This user cannot create new list item for that book`);
@@ -47,46 +48,46 @@ function create({
   listItems[id] = { id, bookId, ownerId, rating, notes, finishDate, startDate };
   persist();
   return read(id);
-}
+};
 
-function read(id) {
+const read = id => {
   validateListItem(id);
   return listItems[id];
-}
+};
 
-function update(id, updates) {
+const update = (id, updates) => {
   validateListItem(id);
   Object.assign(listItems[id], updates);
   persist();
   return read(id);
-}
+};
 
 // this would be called `delete` except that's a reserved word in JS :-(
-function remove(id) {
+const remove = id => {
   validateListItem(id);
   delete listItems[id];
   persist();
-}
+};
 
-function readMany(userId, listItemIds) {
+const readMany = (userId, listItemIds) => {
   return listItemIds.map(id => {
     authorize(userId, id);
     return read(id);
   });
-}
+};
 
-function readByOwner(userId) {
+const readByOwner = userId => {
   return Object.values(listItems).filter(li => li.ownerId === userId);
-}
+};
 
-function validateListItem(id) {
+const validateListItem = id => {
   load();
   if (!listItems[id]) {
     throw new Error(`No list item with the id "${id}"`);
   }
-}
+};
 
-function hash(str) {
+const hash = str => {
   let hash = 5381;
   let i = str.length;
 
@@ -94,12 +95,12 @@ function hash(str) {
     hash = (hash * 33) ^ str.charCodeAt(--i);
   }
   return String(hash >>> 0);
-}
+};
 
-function required(key) {
+const required = key => {
   return () => {
     throw new Error(`${key} is required`);
   };
-}
+};
 
 export { authorize, create, read, update, remove, readMany, readByOwner };
