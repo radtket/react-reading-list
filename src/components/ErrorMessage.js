@@ -1,22 +1,7 @@
-import styled from "@emotion/styled";
 import React from "react";
 
 import PropTypes from "prop-types";
-
-const ErrorStyles = styled.div`
-  padding: 2rem;
-  background: white;
-  margin: 2rem 0;
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  border-left: 5px solid red;
-  p {
-    margin: 0;
-    font-weight: 100;
-  }
-  strong {
-    margin-right: 1rem;
-  }
-`;
+import { Box, Typography } from "@material-ui/core";
 
 const ErrorMessage = ({ error }) => {
   if (!error || !error.message) return null;
@@ -25,22 +10,51 @@ const ErrorMessage = ({ error }) => {
     error.networkError.result &&
     error.networkError.result.errors.length
   ) {
-    return error.networkError.result.errors.map((error, i) => (
-      <ErrorStyles key={i}>
-        <p data-test="graphql-error">
-          <strong>Shoot!</strong>
-          {error.message.replace("GraphQL error: ", "")}
-        </p>
-      </ErrorStyles>
+    return error.networkError.result.errors.map((errorItem, i) => (
+      <Box
+        key={errorItem}
+        by={2}
+        padding={2}
+        style={{
+          border: "1px solid rgba(0, 0, 0, 0.05)",
+          borderLeft: "5px solid red",
+        }}
+      >
+        <Typography
+          data-test="graphql-error"
+          style={{
+            margin: 0,
+          }}
+        >
+          <Box component="strong" mr={1}>
+            Shoot!
+          </Box>
+          {errorItem.message.replace("GraphQL error: ", "")}
+        </Typography>
+      </Box>
     ));
   }
   return (
-    <ErrorStyles>
-      <p data-test="graphql-error">
-        <strong>Shoot!</strong>
+    <Box
+      by={2}
+      padding={2}
+      style={{
+        border: "1px solid rgba(0, 0, 0, 0.05)",
+        borderLeft: "5px solid red",
+      }}
+    >
+      <Typography
+        data-test="graphql-error"
+        style={{
+          margin: 0,
+        }}
+      >
+        <Box component="strong" mr={1}>
+          Shoot!
+        </Box>
         {error.message.replace("GraphQL error: ", "")}
-      </p>
-    </ErrorStyles>
+      </Typography>
+    </Box>
   );
 };
 

@@ -1,6 +1,7 @@
 import React from "react";
+import PropTypes from "prop-types";
 
-const Logo = ({ width = "48", height = "48" }) => {
+const Logo = ({ width = 48, height = 48 }) => {
   return (
     <svg
       height={`${height}px`}
@@ -49,6 +50,16 @@ const Logo = ({ width = "48", height = "48" }) => {
       </g>
     </svg>
   );
+};
+
+Logo.propTypes = {
+  width: PropTypes.number,
+  height: PropTypes.number,
+};
+
+Logo.defaultProps = {
+  width: 48,
+  height: 48,
 };
 
 export default Logo;

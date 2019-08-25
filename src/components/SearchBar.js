@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import InputBase from "@material-ui/core/InputBase";
@@ -28,6 +29,7 @@ const SearchBar = ({
   handleSearchClick,
   isPending,
   isRejected,
+  // eslint-disable-next-line react/prop-types
   error,
 }) => {
   const classes = useStyles();
@@ -85,6 +87,13 @@ const SearchBar = ({
         </form> */}
     </>
   );
+};
+
+SearchBar.propTypes = {
+  handleInputChange: PropTypes.func.isRequired,
+  handleSearchClick: PropTypes.func.isRequired,
+  isPending: PropTypes.bool.isRequired,
+  isRejected: PropTypes.bool.isRequired,
 };
 
 export default SearchBar;

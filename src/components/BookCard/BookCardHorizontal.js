@@ -4,19 +4,13 @@ import {
   Card,
   CardContent,
   CardMedia,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
   makeStyles,
-  Tooltip,
   Typography,
 } from "@material-ui/core";
-import TodayIcon from "@material-ui/icons/Today";
 
 // Components
 import CardButtons from "./CardButtons";
-import CardRating from "./CardRating";
+import BookCardList from "./BookCardList";
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -33,11 +27,6 @@ const useStyles = makeStyles(theme => ({
     width: "100%",
   },
 }));
-
-const formatDate = date =>
-  new Intl.DateTimeFormat("en-US", { month: "short", year: "2-digit" }).format(
-    date
-  );
 
 const BookCardHorizontal = ({
   title,
@@ -69,36 +58,7 @@ const BookCardHorizontal = ({
             {publisher}
           </Typography>
 
-          <List aria-label="main mailbox folders" dense>
-            <ListItem>
-              <Tooltip
-                title={
-                  listItem.finishDate ? "Start and finish date" : "Start date"
-                }
-              >
-                <ListItemIcon>
-                  <TodayIcon />
-                </ListItemIcon>
-              </Tooltip>
-              <ListItemText
-                primary={
-                  <>
-                    {formatDate(listItem.startDate)}{" "}
-                    {listItem.finishDate &&
-                      `— ${formatDate(listItem.finishDate)}`}
-                  </>
-                }
-                secondary={
-                  listItem.finishDate ? "Start and finish date" : "Start date"
-                }
-              />
-            </ListItem>
-            <ListItem>
-              <ListItemText>
-                <CardRating {...listItem} />
-              </ListItemText>
-            </ListItem>
-          </List>
+          {listItem && <BookCardList listItem={listItem} />}
 
           <Typography variant="body2">{synopsis}</Typography>
         </CardContent>

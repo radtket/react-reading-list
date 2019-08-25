@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Link } from "@reach/router";
 
 // Material UI
@@ -14,6 +13,7 @@ import Typography from "@material-ui/core/Typography";
 import { useSingleListItemState } from "../../context/list-item-context";
 import CardRating from "./CardRating";
 import CardButtons from "./CardButtons";
+import { PropTypesBook } from "../../types";
 
 const useStyles = makeStyles({
   media: {
@@ -65,15 +65,7 @@ const BookCardVertical = ({ book }) => {
 };
 
 BookCardVertical.propTypes = {
-  book: PropTypes.shape({
-    title: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    author: PropTypes.string,
-    coverImageUrl: PropTypes.string,
-    id: PropTypes.string,
-    pageCount: PropTypes.number,
-    publisher: PropTypes.string,
-    synopsis: PropTypes.string,
-  }).isRequired,
+  book: PropTypesBook.isRequired,
 };
 
 export default BookCardVertical;

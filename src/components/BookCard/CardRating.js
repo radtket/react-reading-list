@@ -8,6 +8,7 @@ import {
   updateListItem,
 } from "../../context/list-item-context";
 import ErrorMessage from "../ErrorMessage";
+import { PropTypesBook } from "../../types";
 
 const updateRating = ([rating], { dispatch, listItem }) => {
   return updateListItem(dispatch, listItem.id, { rating });
@@ -58,15 +59,7 @@ const CardRating = ({
 };
 
 CardRating.propTypes = {
-  book: PropTypes.shape({
-    title: PropTypes.string,
-    author: PropTypes.string,
-    coverImageUrl: PropTypes.string,
-    id: PropTypes.string,
-    pageCount: PropTypes.number,
-    publisher: PropTypes.string,
-    synopsis: PropTypes.string,
-  }).isRequired,
+  book: PropTypesBook.isRequired,
   bookId: PropTypes.string.isRequired,
   finishDate: PropTypes.number,
   id: PropTypes.string.isRequired,

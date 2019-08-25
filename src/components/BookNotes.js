@@ -1,4 +1,5 @@
 import React, { useCallback } from "react";
+import PropTypes from "prop-types";
 import { useAsync } from "react-async";
 import debounceFn from "debounce-fn";
 import TextField from "@material-ui/core/TextField";
@@ -8,6 +9,7 @@ import {
   updateListItem,
 } from "../context/list-item-context";
 import ErrorMessage from "./ErrorMessage";
+import { PropTypesBook } from "../types";
 
 const updateNotes = ([notes], { dispatch, listItem }) => {
   return updateListItem(dispatch, listItem.id, { notes });
@@ -47,6 +49,28 @@ const BookNotes = ({ listItem }) => {
       variant="filled"
     />
   );
+};
+
+BookNotes.propTypes = {
+  listItem: PropTypes.shape({
+    book: PropTypesBook.isRequired,
+    bookId: PropTypes.string.isRequired,
+    finishDate: PropTypes.number,
+    id: PropTypes.string.isRequired,
+    notes: PropTypes.string,
+    ownerId: PropTypes.string.isRequired,
+    rating: PropTypes.number,
+    startDate: PropTypes.number,
+  }),
+};
+
+BookNotes.defaultProps = {
+  listItem: {
+    finishDate: null,
+    notes: "",
+    rating: null,
+    startDate: null,
+  },
 };
 
 export default BookNotes;

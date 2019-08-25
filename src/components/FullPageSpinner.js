@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Box, CircularProgress } from "@material-ui/core";
 
 const FullPageSpinner = ({ size = 48 }) => {
@@ -12,6 +13,14 @@ const FullPageSpinner = ({ size = 48 }) => {
       <CircularProgress {...{ size }} />
     </Box>
   );
+};
+
+FullPageSpinner.propTypes = {
+  size: PropTypes.number,
+};
+
+FullPageSpinner.defaultProps = {
+  size: 48,
 };
 
 export default FullPageSpinner;
