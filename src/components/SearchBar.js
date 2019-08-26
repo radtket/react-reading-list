@@ -60,35 +60,6 @@ const SearchBar = ({
         </Paper>
       </form>
       {isRejected && <ErrorMessage {...{ error }} />}
-      {/* <form onSubmit={handleSearchClick}>
-          <input
-            style={{ width: "100%" }}
-            id="search"
-            onChange={handleInputChange}
-            placeholder="Search books..."
-          />
-          <Tooltip label="Search Books">
-            <label htmlFor="search">
-              <button
-                style={{
-                  border: "0",
-                  position: "relative",
-                  marginLeft: "-35px",
-                  background: "transparent",
-                }}
-                type="submit"
-              >
-                {isPending && <Spinner />}
-                {!isPending &&
-                  (isRejected ? (
-                    <FaTimes aria-label="error" style={{ color: "red" }} />
-                  ) : (
-                    <FaSearch aria-label="search" />
-                  ))}
-              </button>
-            </label>
-          </Tooltip>
-        </form> */}
     </>
   );
 };

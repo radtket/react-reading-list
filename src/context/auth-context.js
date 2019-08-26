@@ -5,10 +5,11 @@ import React, {
   useLayoutEffect,
 } from "react";
 import PropTypes from "prop-types";
-import { Box, Typography } from "@material-ui/core";
 import { useAsync } from "react-async";
 
 // Components
+// import { ErrorMessage, FullPageSpinner } from "../components";
+import ErrorMessage from "../components/ErrorMessage";
 import FullPageSpinner from "../components/FullPageSpinner";
 
 // Utils
@@ -41,14 +42,7 @@ const AuthProvider = ({ children }) => {
       return <FullPageSpinner />;
     }
     if (isRejected) {
-      return (
-        <Box color="text.error">
-          <Typography color="error" display="block" gutterBottom>
-            Uh oh... There's a problem. Try refreshing the app.
-          </Typography>
-          <pre>{error.message}</pre>
-        </Box>
-      );
+      return <ErrorMessage {...{ error }} />;
     }
   }
 

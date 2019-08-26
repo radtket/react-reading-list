@@ -12,7 +12,7 @@ import {
 } from "@material-ui/core";
 
 // Components
-import { Spinner } from "../../components";
+import { Spinner, ErrorMessage } from "../../components";
 
 import useCallbackStatus from "../../utils/use-callback-status";
 import { slugify } from "../../utils/helpers";
@@ -41,7 +41,7 @@ const FormDialog = ({ button, buttonText, handleSubmit }) => {
         fullWidth
         maxWidth="xs"
         onClose={handleClose}
-        open={open}
+        {...{ open }}
       >
         <DialogTitle id={slugify(`${buttonText} Form Title`)}>
           {buttonText}
@@ -50,7 +50,7 @@ const FormDialog = ({ button, buttonText, handleSubmit }) => {
         <DialogContent>
           {isRejected && (
             <DialogContentText color="error">
-              {error && error.message}
+              <ErrorMessage {...{ error }} />
             </DialogContentText>
           )}
           <Box

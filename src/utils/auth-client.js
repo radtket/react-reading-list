@@ -8,9 +8,11 @@ const handleUserResponse = ({ user: { token, ...user } }) => {
 
 const getUser = () => {
   const token = getToken();
+
   if (!token) {
     return Promise.resolve(null);
   }
+
   return client("me").catch(error => {
     logout();
     return Promise.reject(error);

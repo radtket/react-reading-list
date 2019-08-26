@@ -3,9 +3,11 @@ import { localStorageKey } from "./constants";
 const client = (endpoint, { body, ...customConfig } = {}) => {
   const token = window.localStorage.getItem(localStorageKey);
   const headers = { "content-type": "application/json" };
+
   if (token) {
     headers.Authorization = `Bearer ${token}`;
   }
+
   const config = {
     method: body ? "POST" : "GET",
     ...customConfig,
@@ -14,6 +16,7 @@ const client = (endpoint, { body, ...customConfig } = {}) => {
       ...customConfig.headers,
     },
   };
+
   if (body) {
     config.body = JSON.stringify(body);
   }

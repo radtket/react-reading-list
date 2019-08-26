@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useAsync } from "react-async";
 import { Box, Grid, Typography } from "@material-ui/core";
 import * as booksClient from "../../../utils/books-client";
-
 // Components
 import {
   BookCardVertical,
@@ -10,6 +9,7 @@ import {
   SearchBar,
   Spinner,
 } from "../../../components";
+import { isArrayEmpty } from "../../../utils/helpers";
 
 const initialSearch = () => {
   return booksClient.search("");
@@ -33,6 +33,8 @@ const DiscoverBooksScreen = () => {
     setHasSearched(true);
     run(query);
   };
+
+  const noBooksFound = isArrayEmpty(books);
 
   return (
     <div>
@@ -64,7 +66,7 @@ const DiscoverBooksScreen = () => {
 
             {isResolved && (
               <Typography>
-                {books.length
+                {!noBooksFound
                   ? "Here you go! Find more books with the search bar above."
                   : "Hmmm... I couldn't find any books to suggest for you. Sorry."}
               </Typography>
@@ -72,7 +74,7 @@ const DiscoverBooksScreen = () => {
           </Box>
         )}
 
-        {isResolved && books.length && (
+        {isResolved && !noBooksFound && (
           <Grid container spacing={3}>
             {books.map(book => (
               <Grid key={book.id} item xs={3}>
@@ -83,7 +85,7 @@ const DiscoverBooksScreen = () => {
         )}
 
         {isResolved &&
-          !books.length &&
+          noBooksFound &&
           hasSearched &&
           (isPending ? (
             <Box m="auto" width={1}>
