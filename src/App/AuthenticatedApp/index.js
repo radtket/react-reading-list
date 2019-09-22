@@ -16,8 +16,9 @@ const useStyles = makeStyles(({ mixins, palette, spacing }) => ({
   },
 }));
 
-const AuthenticatedApp = () => {
+const AuthenticatedApp = props => {
   const { toolbar, content } = useStyles();
+
   return (
     <Box display="flex">
       <Navbar toolbar={toolbar} />

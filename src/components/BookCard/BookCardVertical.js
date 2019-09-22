@@ -3,6 +3,7 @@ import { Link } from "@reach/router";
 
 // Material UI
 import {
+  Box,
   Card,
   CardActionArea,
   CardContent,
@@ -16,6 +17,7 @@ import { useSingleListItemState } from "../../context/list-item-context";
 import CardRating from "./CardRating";
 import CardButtons from "./CardButtons";
 import { PropTypesBook } from "../../types";
+import BookCardList from "./BookCardList";
 
 const useStyles = makeStyles({
   media: {
@@ -29,7 +31,7 @@ const BookCardVertical = ({ book }) => {
     coverImageUrl,
     id: bookId,
     // pageCount,
-    // publisher,
+    publisher,
     synopsis,
     title,
   } = book;
@@ -45,7 +47,7 @@ const BookCardVertical = ({ book }) => {
           className={classes.media}
           component={Link}
           image={coverImageUrl}
-          title="Contemplative Reptile"
+          title={`${title} book cover`}
           to={`/book/${bookId}`}
         />
         <CardContent>
@@ -54,8 +56,12 @@ const BookCardVertical = ({ book }) => {
           </Typography>
           <Typography color="textSecondary" gutterBottom>
             {author}
+            <Box component="span" mx={1}>
+              |
+            </Box>
+            {publisher}
           </Typography>
-          {listItem && <CardRating {...listItem} />}
+          {listItem && <BookCardList listItem={listItem} />}
           <Typography color="textSecondary" component="p" variant="body2">
             {synopsis.substring(0, 500)}...
           </Typography>
