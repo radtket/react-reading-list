@@ -6,6 +6,15 @@ const handleUserResponse = ({ user: { token, ...user } }) => {
   return user;
 };
 
+const logout = () => {
+  window.localStorage.removeItem(localStorageKey);
+  return Promise.resolve();
+};
+
+const getToken = () => {
+  return window.localStorage.getItem(localStorageKey);
+};
+
 const getUser = () => {
   const token = getToken();
 
@@ -29,15 +38,6 @@ const register = ({ username, password }) => {
   return client("register", { body: { username, password } }).then(
     handleUserResponse
   );
-};
-
-const logout = () => {
-  window.localStorage.removeItem(localStorageKey);
-  return Promise.resolve();
-};
-
-const getToken = () => {
-  return window.localStorage.getItem(localStorageKey);
 };
 
 export { login, register, logout, getToken, getUser };

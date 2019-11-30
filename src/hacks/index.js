@@ -16,13 +16,47 @@ const sleep = (t = Math.random() * 200 + 300) =>
 
 const apiUrl = new window.URL(process.env.REACT_APP_API_URL);
 
+const getBooksNotInUsersList = userId => {
+  const bookIdsInUsersList = listItems.readByOwner(userId).map(li => li.bookId);
+  return allBooks.filter(book => !bookIdsInUsersList.includes(book.id));
+};
+
+const shuffle = array => {
+  return [...array].sort(() => Math.random() - 0.5);
+};
+
+const getSubjectId = url => {
+  const { pathname } = new URL(url);
+  return pathname
+    .split("/")
+    .filter(Boolean)
+    .slice(-1)[0];
+};
+
+const getUser = config => {
+  const token = config.headers.Authorization.replace("Bearer ", "");
+  if (!token) {
+    throw new Error("A token must be provided");
+  }
+  let userId;
+  try {
+    userId = atob(token);
+  } catch (error) {
+    throw new Error("Invalid token. Please login again.");
+  }
+  return users.read(userId);
+};
+
 const isApi = (endpoint, method = "GET", queryParam) => (url, config) => {
   const { origin, pathname, search } = new window.URL(url);
+
   return (
     origin === apiUrl.origin &&
     pathname.startsWith(`${apiUrl.pathname}/${endpoint}`) &&
     config.method === method &&
-    (queryParam ? qs.parse(search).hasOwnProperty(queryParam) : true)
+    (queryParam
+      ? Object.prototype.hasOwnProperty.call(qs.parse(search), queryParam)
+      : true)
   );
 };
 
@@ -214,37 +248,6 @@ const fakeResponses = [
     handler: (...args) => originalFetch(...args),
   },
 ];
-
-const getBooksNotInUsersList = userId => {
-  const bookIdsInUsersList = listItems.readByOwner(userId).map(li => li.bookId);
-  return allBooks.filter(book => !bookIdsInUsersList.includes(book.id));
-};
-
-const shuffle = array => {
-  return [...array].sort(() => Math.random() - 0.5);
-};
-
-const getSubjectId = url => {
-  const { pathname } = new URL(url);
-  return pathname
-    .split("/")
-    .filter(Boolean)
-    .slice(-1)[0];
-};
-
-const getUser = config => {
-  const token = config.headers.Authorization.replace("Bearer ", "");
-  if (!token) {
-    throw new Error("A token must be provided");
-  }
-  let userId;
-  try {
-    userId = atob(token);
-  } catch (error) {
-    throw new Error("Invalid token. Please login again.");
-  }
-  return users.read(userId);
-};
 
 window.fetch = async (...args) => {
   const { handler } = fakeResponses.find(({ test }) => {

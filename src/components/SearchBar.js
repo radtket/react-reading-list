@@ -36,14 +36,14 @@ const SearchBar = ({
   // eslint-disable-next-line react/prop-types
   error,
 }) => {
-  const classes = useStyles();
+  const { root, input, iconButton } = useStyles();
 
   return (
     <>
       <form onSubmit={handleSearchClick}>
-        <Paper className={classes.root}>
+        <Paper className={root}>
           <InputBase
-            className={classes.input}
+            className={input}
             inputProps={{ "aria-label": "search google maps" }}
             onChange={handleInputChange}
             placeholder="Search books..."
@@ -51,7 +51,7 @@ const SearchBar = ({
           <Tooltip title="Search Books">
             <IconButton
               aria-label="Search Books"
-              className={classes.iconButton}
+              className={iconButton}
               type="submit"
             >
               <SearchIcon />

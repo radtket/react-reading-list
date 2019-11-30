@@ -16,7 +16,7 @@ const useStyles = makeStyles(({ mixins, palette, spacing }) => ({
   },
 }));
 
-const AuthenticatedApp = props => {
+const AuthenticatedApp = () => {
   const { toolbar, content } = useStyles();
 
   return (

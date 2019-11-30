@@ -9,7 +9,7 @@ const ErrorMessage = ({ error }) => {
     error.networkError.result &&
     error.networkError.result.errors.length
   ) {
-    return error.networkError.result.errors.map((errorItem, i) => (
+    return error.networkError.result.errors.map(errorItem => (
       <Box
         key={errorItem}
         by={2}
