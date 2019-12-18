@@ -14,7 +14,7 @@ import CardButtons from "./CardButtons";
 import BookCardList from "./BookCardList";
 import { PropTypesBook } from "../../types";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
   card: {
     display: "flex",
   },

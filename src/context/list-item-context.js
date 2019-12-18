@@ -6,7 +6,7 @@ import { useAuth } from "./auth-context";
 import { useUser } from "./user-context";
 
 // Client
-import * as listItemClient from "../utils/list-items-client";
+import { create, remove, update } from "../utils/list-items-client";
 
 const ListItemStateContext = createContext();
 const ListItemDispatchContext = createContext();
@@ -53,21 +53,21 @@ ListItemProvider.propTypes = {
 };
 
 const removeListItem = (dispatch, id) => {
-  return listItemClient.remove(id).then(data => {
+  return remove(id).then(data => {
     dispatch({ type: "remove", id });
     return data;
   });
 };
 
 const addListItem = (dispatch, listItemData) => {
-  return listItemClient.create(listItemData).then(data => {
+  return create(listItemData).then(data => {
     dispatch({ type: "add", listItem: data.listItem });
     return data;
   });
 };
 
 const updateListItem = (dispatch, listItemId, updates) => {
-  return listItemClient.update(listItemId, updates).then(data => {
+  return update(listItemId, updates).then(data => {
     dispatch({ type: "update", listItem: data.listItem });
     return data;
   });

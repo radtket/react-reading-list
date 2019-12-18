@@ -13,7 +13,7 @@ import AppProviders from "./context";
 const theme = createMuiTheme({});
 
 ReactDOM.render(
-  <ThemeProvider theme={theme}>
+  <ThemeProvider {...{ theme }}>
     <AppProviders>
       <App />
     </AppProviders>

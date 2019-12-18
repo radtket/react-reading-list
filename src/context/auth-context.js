@@ -14,7 +14,7 @@ import FullPageSpinner from "../components/FullPageSpinner";
 
 // Utils
 import bootstrapAppData from "../utils/bootstrapAppData";
-import * as authClient from "../utils/auth-client";
+import { login, register, logout } from "../utils/auth-client";
 
 const AuthContext = createContext();
 
@@ -46,12 +46,15 @@ const AuthProvider = ({ children }) => {
     }
   }
 
-  const login = form => authClient.login(form).then(reload);
-  const register = form => authClient.register(form).then(reload);
-  const logout = () => authClient.logout().then(reload);
-
   return (
-    <AuthContext.Provider value={{ data, login, logout, register }}>
+    <AuthContext.Provider
+      value={{
+        data,
+        login: form => login(form).then(reload),
+        logout: () => logout().then(reload),
+        register: form => register(form).then(reload),
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

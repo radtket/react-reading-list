@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Link } from "@reach/router";
 
 // Material UI
@@ -21,6 +20,7 @@ import { FindInPage, LocalLibrary, PlaylistAddCheck } from "@material-ui/icons";
 // Components
 import { useAuth } from "../../context/auth-context";
 import { useUser } from "../../context/user-context";
+import ToolbarMixin from "../../components/ToolbarMixin";
 
 const drawerWidth = 240;
 
@@ -38,7 +38,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const Navbar = ({ toolbar }) => {
+const Navbar = () => {
   const { appBar, drawer, drawerPaper } = useStyles();
   const { username } = useUser();
   const { logout } = useAuth();
@@ -68,7 +68,8 @@ const Navbar = ({ toolbar }) => {
         className={drawer}
         variant="permanent"
       >
-        <div className={toolbar} />
+        <ToolbarMixin />
+
         <Divider />
         <List>
           <ListItem button component={Link} to="/list">
@@ -93,10 +94,6 @@ const Navbar = ({ toolbar }) => {
       </Drawer>
     </>
   );
-};
-
-Navbar.propTypes = {
-  toolbar: PropTypes.string.isRequired,
 };
 
 export default Navbar;
