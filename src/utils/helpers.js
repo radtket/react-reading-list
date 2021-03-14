@@ -10,3 +10,13 @@ export const isArrayEmpty = arrayArg => {
   }
   return true;
 };
+
+export const hash = str => {
+  let h = 5381;
+  let i = str.length;
+
+  while (i) {
+    h = (h * 33) ^ str.charCodeAt(--i);
+  }
+  return String(h >>> 0);
+};

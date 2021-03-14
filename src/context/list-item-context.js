@@ -11,27 +11,27 @@ import { create, remove, update } from "../utils/list-items-client";
 const ListItemStateContext = createContext();
 const ListItemDispatchContext = createContext();
 
-const listReducer = (listItems, action) => {
-  switch (action.type) {
+const listReducer = (listItems, { type, listItem, id }) => {
+  switch (type) {
     case "add": {
-      return [...listItems, action.listItem];
+      return [...listItems, listItem];
     }
     case "remove": {
-      return listItems.filter(li => li.id !== action.id);
+      return listItems.filter(li => li.id !== id);
     }
     case "update": {
       return listItems.map(li => {
-        if (li.id === action.listItem.id) {
+        if (li.id === listItem.id) {
           return {
             ...li,
-            ...action.listItem,
+            ...listItem,
           };
         }
         return li;
       });
     }
     default: {
-      throw new Error(`Unhandled action type: ${action.type}`);
+      throw new Error(`Unhandled action type: ${type}`);
     }
   }
 };

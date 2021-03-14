@@ -14,7 +14,7 @@ import {
 
 // Components
 import { useSingleListItemState } from "../../context/list-item-context";
-import CardRating from "./CardRating";
+// import CardRating from "./CardRating";
 import CardButtons from "./CardButtons";
 import { PropTypesBook } from "../../types";
 import BookCardList from "./BookCardList";

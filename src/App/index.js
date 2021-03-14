@@ -17,6 +17,7 @@ const App = () => {
   useEffect(() => {
     loadAuthenticatedApp();
   }, []);
+
   return (
     <Suspense fallback={<FullPageSpinner />}>
       {user ? <AuthenticatedApp /> : <UnauthenticatedApp />}
