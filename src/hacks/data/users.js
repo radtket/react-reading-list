@@ -1,4 +1,5 @@
 import { usersKey, siteKey } from "../../utils/constants";
+import { hash } from "../../utils/helpers";
 
 // istanbul ignore file
 const users = {};
@@ -14,6 +15,20 @@ try {
   persist();
   // ignore json parse error
 }
+
+const validateUser = id => {
+  load();
+  if (!users[id]) {
+    throw new Error(`No user with the id "${id}"`);
+  }
+};
+
+// this would be called `delete` except that's a reserved word in JS :-(
+const remove = id => {
+  validateUser(id);
+  delete users[id];
+  persist();
+};
 
 window[siteKey] = window[siteKey] || {};
 window[siteKey].purgeUsers = () => {
@@ -53,30 +68,6 @@ const update = (id, updates) => {
   Object.assign(users[id], updates);
   persist();
   return read(id);
-};
-
-// this would be called `delete` except that's a reserved word in JS :-(
-const remove = id => {
-  validateUser(id);
-  delete users[id];
-  persist();
-};
-
-const validateUser = id => {
-  load();
-  if (!users[id]) {
-    throw new Error(`No user with the id "${id}"`);
-  }
-};
-
-const hash = str => {
-  let hash = 5381;
-  let i = str.length;
-
-  while (i) {
-    hash = (hash * 33) ^ str.charCodeAt(--i);
-  }
-  return String(hash >>> 0);
 };
 
 export { authenticate, create, read, update, remove };

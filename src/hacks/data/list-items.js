@@ -1,4 +1,5 @@
 import { listItemsKey, siteKey } from "../../utils/constants";
+import { hash } from "../../utils/helpers";
 
 // istanbul ignore file
 const listItems = {};
@@ -26,11 +27,29 @@ window[siteKey].purgeListItems = () => {
   persist();
 };
 
+const validateListItem = id => {
+  load();
+  if (!listItems[id]) {
+    throw new Error(`No list item with the id "${id}"`);
+  }
+};
+
+const read = id => {
+  validateListItem(id);
+  return listItems[id];
+};
+
 const authorize = (userId, listItemId) => {
   const listItem = read(listItemId);
   if (listItem.ownerId !== userId) {
     throw new Error("User is not authorized to view that list");
   }
+};
+
+const required = key => {
+  return () => {
+    throw new Error(`${key} is required`);
+  };
 };
 
 const create = ({
@@ -48,11 +67,6 @@ const create = ({
   listItems[id] = { id, bookId, ownerId, rating, notes, finishDate, startDate };
   persist();
   return read(id);
-};
-
-const read = id => {
-  validateListItem(id);
-  return listItems[id];
 };
 
 const update = (id, updates) => {
@@ -78,29 +92,6 @@ const readMany = (userId, listItemIds) => {
 
 const readByOwner = userId => {
   return Object.values(listItems).filter(li => li.ownerId === userId);
-};
-
-const validateListItem = id => {
-  load();
-  if (!listItems[id]) {
-    throw new Error(`No list item with the id "${id}"`);
-  }
-};
-
-const hash = str => {
-  let hash = 5381;
-  let i = str.length;
-
-  while (i) {
-    hash = (hash * 33) ^ str.charCodeAt(--i);
-  }
-  return String(hash >>> 0);
-};
-
-const required = key => {
-  return () => {
-    throw new Error(`${key} is required`);
-  };
 };
 
 export { authorize, create, read, update, remove, readMany, readByOwner };
